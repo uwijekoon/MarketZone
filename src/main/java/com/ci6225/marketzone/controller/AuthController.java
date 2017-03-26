@@ -25,5 +25,17 @@ public class AuthController {
 		return VIEW_INDEX;
 
 	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String welcomeNew(ModelMap model) {
+
+		model.addAttribute("message", "WelcomeNEW");
+		model.addAttribute("counter", ++counter);
+		logger.debug("[welcome] counter : {}", counter);
+
+		// Spring uses InternalResourceViewResolver and return back index.jsp
+		return VIEW_INDEX;
+
+	}
 
 }
