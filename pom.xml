@@ -15,6 +15,7 @@
 		<logback.version>1.0.13</logback.version>
 		<jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
 		<servlet.version>3.1.0</servlet.version>
+		<commons-lang.version>3.0</commons-lang.version>
 	</properties>
 
 	<dependencies>
@@ -75,6 +76,12 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang.version}</version>
 		</dependency>
 
 	</dependencies>
