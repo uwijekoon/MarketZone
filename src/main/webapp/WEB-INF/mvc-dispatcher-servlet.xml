@@ -25,4 +25,5 @@
 	<mvc:resources location="/themes/" mapping="/themes/**"/>
 	<mvc:annotation-driven />
 	
+	
 </beans>
