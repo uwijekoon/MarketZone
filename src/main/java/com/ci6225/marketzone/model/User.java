@@ -1,19 +1,65 @@
 package com.ci6225.marketzone.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="USER")
 public class User {
 	
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
+	@Column(name="user_type")
 	private String userType;
+	
+	@Column(name="user_code")
 	private String userCode;
+	
+	@Column(name="first_name")
 	private String firstName;
+	
+	@Column(name="last_name")
 	private String lastName;
+	
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="phone")
 	private String phone;
+	
+	@Column(name="country")
 	private String country;
+	
+	@Column(name="shop_name")
 	private String shopName;
+	
+	@Column(name="description")
 	private String description;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Transient
 	private String confirmPassword;
 	
+	@Column(name="salt")
+	private byte[] salt;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getUserType() {
 		return userType;
 	}
@@ -80,6 +126,11 @@ public class User {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
+	public byte[] getSalt() {
+		return salt;
+	}
+	public void setSalt(byte[] salt) {
+		this.salt = salt;
+	}
 	
 }

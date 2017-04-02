@@ -40,7 +40,7 @@
                                 <li><a href="${basedURL}/auth/Logout">Logout</a></li>
 
                             </c:if>
-                            <c:if test="${sessionScope.user == null}"><li><a href="${basedURL}auth/login">Login</a></li></c:if>
+                            <c:if test="${sessionScope.user == null}"><li><a href="${basedURL}user/login">Login</a></li></c:if>
 
                         </ul>
                     </div>

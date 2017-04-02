@@ -13,19 +13,21 @@
             <div class="row">
                 <div class="span5">					
                     <h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
-                    <form:form action="/auth/Login" method="post" commandName="userForm">
+                    <form:form action="${basedURL}user/login" method="post" commandName="loginForm">
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label">Username</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your username" path="userCode" id="userCode" class="input-xlarge"/>
                                 </div>
+                                <form:errors path="userCode" cssclass="form-error"></form:errors>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Password</label>
                                 <div class="controls">
                                     <form:input type="password" placeholder="Enter your password" id="password" path="password" class="input-xlarge"/>
                                 </div>
+                                <form:errors path="password" cssclass="form-error"></form:errors>
                             </div>
                             <div class="control-group">
                                 <input tabindex="3" class="btn btn-inverse large" type="submit" value="Sign into your account"/>
@@ -35,7 +37,7 @@
                 </div>
                 <div class="span7">					
                     <h4 class="title"><span class="text"><strong>Register</strong> Form</span></h4>
-                    <form:form action="${basedURL}auth/register" method="post" class="form-stacked" commandName="userForm">
+                    <form:form action="${basedURL}user/register" method="post" class="form-stacked" commandName="userForm">
                         <fieldset>
                             <div class="control-group radiobtn">
 
