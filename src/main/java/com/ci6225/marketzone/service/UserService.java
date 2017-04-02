@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ci6225.marketzone.dao.SellerDao;
 import com.ci6225.marketzone.dao.UserDao;
 import com.ci6225.marketzone.model.Seller;
-import com.ci6225.marketzone.model.Seller1;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.util.PasswordUtil;
 
