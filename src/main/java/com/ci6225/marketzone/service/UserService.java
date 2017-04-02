@@ -46,7 +46,8 @@ public class UserService {
         } else {
         	user.setSeller(null);
         }
-        
+        userDao.saveUser(user);
+
 		return true;
 	}
 	
