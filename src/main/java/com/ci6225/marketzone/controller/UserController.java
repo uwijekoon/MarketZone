@@ -32,8 +32,8 @@ public class UserController {
 	private static final String VIEW_REGISTER = "register";
 	private static final String VIEW_BUYER = "orderHistory";
 	private static final String VIEW_SELLER = "productList";
-	private static final String USER_TYPE_BUYER = "1";
-	private static final String USER_TYPE_SELLER = "2";
+	private static final int USER_TYPE_BUYER = 1;
+	private static final int USER_TYPE_SELLER = 2;
 	
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -94,10 +94,10 @@ public class UserController {
         	
         	if(dbUser != null) {
         		request.setAttribute("user", dbUser);
-	        	if(USER_TYPE_BUYER.equals(dbUser.getUserType())) {
-	        		return USER_TYPE_BUYER;
-	        	} else if(USER_TYPE_SELLER.equals(dbUser.getUserType())) {
-	        		return USER_TYPE_SELLER;
+	        	if(USER_TYPE_BUYER == dbUser.getUserType()) {
+	        		return VIEW_BUYER;
+	        	} else if(USER_TYPE_SELLER == dbUser.getUserType()) {
+	        		return VIEW_SELLER;
 	        	}
         	} 
         }

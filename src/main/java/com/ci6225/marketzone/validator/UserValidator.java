@@ -28,10 +28,10 @@ public class UserValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.userForm.email", "Email field is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "country", "NotEmpty.userForm.country", "Please select the Country.");
 		
-		if(user.getUserType() != null && "2".equals(user.getUserType())) {
+		/*if(user.getUserType() != 0 && user.getUserType()==2) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shopName", "NotEmpty.userForm.shopName", "ShopName field is required.");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "NotEmpty.userForm.description", "Description field is required.");
-		}
+		}*/
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","required.confirmPassword", "Confirm Password is required.");
@@ -41,7 +41,7 @@ public class UserValidator implements Validator{
 		if(user.getConfirmPassword() != null && !(user.getPassword().equals(user.getConfirmPassword()))){
 			errors.rejectValue("confirmPassword", "Notmatch.userForm.password", "Confirm password does not match with password");
 		}
-		if(user.getUserType() != null && !("1".equals(user.getUserType()) || "2".equals(user.getUserType()))){
+		if(user.getUserType() != 0 && !(user.getUserType() == 1 || user.getUserType() == 2)){
 			errors.rejectValue("userType", "Notmatch.userForm.userType", "Please select user type.");
 		}
 		

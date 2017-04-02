@@ -17,10 +17,10 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="user_type")
-	private String userType;
+	@Column(name="user_type_id")
+	private int userType;
 	
-	@Column(name="user_code")
+	@Column(name="usercode")
 	private String userCode;
 	
 	@Column(name="first_name")
@@ -38,12 +38,6 @@ public class User {
 	@Column(name="country")
 	private String country;
 	
-	@Column(name="shop_name")
-	private String shopName;
-	
-	@Column(name="description")
-	private String description;
-	
 	@Column(name="password")
 	private String password;
 	
@@ -60,10 +54,10 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUserType() {
+	public int getUserType() {
 		return userType;
 	}
-	public void setUserType(String userType) {
+	public void setUserType(int userType) {
 		this.userType = userType;
 	}
 	public String getUserCode() {
@@ -101,18 +95,6 @@ public class User {
 	}
 	public void setCountry(String country) {
 		this.country = country;
-	}
-	public String getShopName() {
-		return shopName;
-	}
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
 	}
 	public String getPassword() {
 		return password;
