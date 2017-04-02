@@ -24,7 +24,7 @@ public class ProductController {
 	@Qualifier("productService")
 	private ProductService productService;
 	
-	@RequestMapping(value = {"/GetProductsList"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/GetProductsList"}, method = RequestMethod.GET)
 	public String getProductsList(ModelMap model) { 
 		List<Product> productList = productService.getAvailableProductList();
         return ViewConstants.INDEX;

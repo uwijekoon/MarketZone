@@ -10,9 +10,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,15 +40,14 @@ public class Product {
     private int quantity;
 	@Column(name="unit_price")
     private float unitPrice;
-	@Column(name="seller_id")
-    private int sellerId;
 	@Column(name="image_path")
     private String image;
 	@Column(name="delete_flag")
 	private char deleted;
-	@OneToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="seller_id", nullable = false)
     private Seller seller;
-    private List<Integer> categoryList;
 
     public int getId() {
         return id;
@@ -86,21 +89,7 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public int getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public List<Integer> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Integer> categoryList) {
-        this.categoryList = categoryList;
-    }
+   
 
     public Seller getSeller() {
         return seller;

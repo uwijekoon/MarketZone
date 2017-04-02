@@ -30,7 +30,7 @@ public class UserController {
 	
 	private static final String VIEW_INDEX = "index";
 	private static final String VIEW_REGISTER = "register";
-	private static final String VIEW_BUYER = "orderHistory";
+	private static final String VIEW_BUYER = "redirect:/product/GetProductsList";
 	private static final String VIEW_SELLER = "productList";
 	private static final int USER_TYPE_BUYER = 1;
 	private static final int USER_TYPE_SELLER = 2;

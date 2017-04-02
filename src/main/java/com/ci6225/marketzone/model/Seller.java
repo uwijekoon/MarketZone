@@ -1,5 +1,7 @@
 package com.ci6225.marketzone.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -33,6 +36,9 @@ public class Seller {
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private User user;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+	private List<Product> productList;
 
 	public int getId() {
 		return id;
@@ -65,6 +71,13 @@ public class Seller {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
 	
 }

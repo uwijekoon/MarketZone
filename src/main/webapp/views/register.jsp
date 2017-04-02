@@ -98,7 +98,7 @@
                                      <form:errors path="country" cssclass="form-error"></form:errors>
                                 </div>
                             </div>
-                           <%-- <div class="control-group seller-field ${userType=='2' ? 'show' : 'hide'}">
+                           <div class="control-group seller-field ${userType=='2' ? 'show' : 'hide'}">
                                 <label class="control-label"><span class="required">*</span> Shop Name:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your Shop Name" path="shopName" class="input-xlarge"/>
@@ -113,7 +113,7 @@
                                     <form:errors path="description" cssclass="form-error"></form:errors>
                                 </div>
                                 
-                            </div>--%>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Password:</label>
                                 <div class="controls">
