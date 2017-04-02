@@ -3,6 +3,7 @@ package com.ci6225.marketzone.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.ci6225.marketzone.model.Product;
@@ -22,6 +23,7 @@ public class ProductDao extends AbstractDao<Integer, Product>{
 	@SuppressWarnings("unchecked")
     public List<Product> findAvailableProducts() {
         Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("deleted", 'F'));
         return (List<Product>) criteria.list();
     }
     

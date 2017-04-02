@@ -20,9 +20,9 @@ public class ProductService {
 		return productDao.findById(id);
 	}
 	
-	/*public List<Product> getAvailableProductList() {
-		return productDao.findById(id);
-	}*/
+	public List<Product> getAvailableProductList() {
+		return productDao.findAvailableProducts();
+	}
 	
 	
 }

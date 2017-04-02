@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ci6225.marketzone.dao.CartDao;
-import com.ci6225.marketzone.model.Cart;
+import com.ci6225.marketzone.dao.OrderDao;
+import com.ci6225.marketzone.model.Order;
 
-@Service("cartService")
+@Service("orderService")
 @Transactional
-public class CartService {
+public class OrderService {
 	
 	@Autowired
-	private CartDao cartDao;
+	private OrderDao orderDao;
 	
-	public Cart findById(int id) {
-		return cartDao.findById(id);
+	public Order findById(int id) {
+		return orderDao.findById(id);
 	}
 	
 	

@@ -40,6 +40,8 @@ public class Product {
     private int sellerId;
 	@Column(name="image_path")
     private String image;
+	@Column(name="delete_flag")
+	private char deleted;
 	@OneToOne
     private Seller seller;
     private List<Integer> categoryList;
@@ -115,5 +117,13 @@ public class Product {
     public void setImage(String image) {
         this.image = image;
     }
+
+	public char getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(char deleted) {
+		this.deleted = deleted;
+	}
 
 }
