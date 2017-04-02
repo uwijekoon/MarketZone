@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 
 import com.ci6225.marketzone.model.Seller;
-import com.ci6225.marketzone.model.Seller1;
 import com.ci6225.marketzone.model.User;
 
 @Repository("sellerDao")
