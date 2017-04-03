@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -48,7 +49,10 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="seller_id", nullable = false)
     private Seller seller;
-
+	
+	@Transient
+	private byte[] imageFile;
+	
     public int getId() {
         return id;
     }
@@ -89,8 +93,6 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-   
-
     public Seller getSeller() {
         return seller;
     }
@@ -113,6 +115,14 @@ public class Product {
 
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
+	}
+
+	public byte[] getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(byte[] imageFile) {
+		this.imageFile = imageFile;
 	}
 
 }

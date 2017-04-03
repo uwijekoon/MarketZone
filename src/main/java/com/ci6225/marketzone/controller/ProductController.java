@@ -44,11 +44,7 @@ public class ProductController {
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST)
 	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") Product product, BindingResult bindingResult, ModelMap model, Errors errors) { 
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userCode", "required.userCode", "UserCode is required.");
-		
-		
+
         return ViewConstants.ADD_PRODUCT;
 	}
 
