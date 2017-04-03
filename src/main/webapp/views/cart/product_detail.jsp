@@ -14,8 +14,8 @@
                     <div class="span4 product-detail-box">
                         <c:choose>
                             <c:when test="${not empty detailProduct.image}">
-                                <a href="${pageContext.request.contextPath}/Images/${detailProduct.seller.userId}/${detailProduct.image}" class="thumbnail" data-fancybox-group="group1" title="Description 1">
-                                <img alt="" src="${pageContext.request.contextPath}/Images/${detailProduct.seller.userId}/${detailProduct.image}" class="product-detail-image"></a> 
+                                <a href="${pageContext.request.contextPath}/Images/${detailProduct.seller.id}/${detailProduct.image}" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                                <img alt="" src="${pageContext.request.contextPath}/Images/${detailProduct.seller.id}/${detailProduct.image}" class="product-detail-image"></a> 
                             </c:when>
                             <c:otherwise>
                                 <a href="${pageContext.request.contextPath}/themes/images/no_image.png" class="thumbnail" data-fancybox-group="group1" title="Description 1">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="span5">
                         <address>
-                            <strong>Seller:</strong> <span>${detailProduct.seller.sellerName}</span><br>
+                            <strong>Seller:</strong> <span>${detailProduct.seller.name}</span><br>
                             <strong>Product Name:</strong> <span>${detailProduct.name}</span><br>
                             <strong>Availability:</strong> 
                             <c:if test="${detailProduct.quantity == 0}">
@@ -70,7 +70,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="home">${detailProduct.description}</div>
                             <div class="tab-pane" id="profile">
-                                ${detailProduct.seller.sellerDescription}
+                                ${detailProduct.seller.description}
                             </div>
                         </div>							
                     </div>						

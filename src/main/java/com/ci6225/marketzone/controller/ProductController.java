@@ -2,6 +2,8 @@ package com.ci6225.marketzone.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,10 +26,18 @@ public class ProductController {
 	@Qualifier("productService")
 	private ProductService productService;
 	
-	@RequestMapping(value = {"/GetProductsList"}, method = RequestMethod.GET)
-	public String getProductsList(ModelMap model) { 
+	@RequestMapping(value = {"/getProductsList"}, method = RequestMethod.GET)
+	public String getProductsList(HttpServletRequest request, ModelMap model) { 
 		List<Product> productList = productService.getAvailableProductList();
+		request.setAttribute("availableProductList", productList);
         return ViewConstants.INDEX;
 	}
 
+	@RequestMapping(value = {"/getProduct"}, method = RequestMethod.GET)
+	public String getProductsDetails(HttpServletRequest request, ModelMap model) { 
+		Product product = productService.findById(Integer.valueOf(request.getParameter("productId")));
+		request.setAttribute("detailProduct", product);
+        return ViewConstants.PRODUCT_DETAIL;
+	}
+	
 }

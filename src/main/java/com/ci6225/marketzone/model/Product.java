@@ -45,7 +45,7 @@ public class Product {
 	@Column(name="delete_flag")
 	private char deleted;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="seller_id", nullable = false)
     private Seller seller;
 
