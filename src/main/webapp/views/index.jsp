@@ -50,18 +50,18 @@
                                             <li class="span3">
                                                 <div class="product-box">
                                                     <span class="sale_tag"></span>
-                                                    <p><a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${index.index}">
+                                                    <p><a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}">
                                                             <c:choose>
                                                                 <c:when test="${not empty product.image}">
-                                                                    <img width="100" height="100" src="${pageContext.request.contextPath}/Images/${product.seller.userId}/${product.image}" />
+                                                                    <img width="100" height="100" src="${pageContext.request.contextPath}/Images/${product.seller.id}/${product.image}" />
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <img width="100" height="100" src="${pageContext.request.contextPath}/themes/images/no_image.png" />
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </a></p>
-                                                    <a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${index.index}" class="title">${product.name}</a><br/>
-                                                    <a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${index.index}" class="category">${product.seller.sellerName}</a>
+                                                    <a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}" class="title">${product.name}</a><br/>
+                                                    <a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}" class="category">${product.seller.name}</a>
                                                     <p class="price"><fmt:formatNumber value="${product.unitPrice}" type="currency"/></p>
                                                 </div>
                                             </li>

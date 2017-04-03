@@ -2,11 +2,17 @@ package com.ci6225.marketzone.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,10 +30,33 @@ public class ProductController {
 	@Qualifier("productService")
 	private ProductService productService;
 	
-	@RequestMapping(value = {"/GetProductsList"}, method = RequestMethod.GET)
-	public String getProductsList(ModelMap model) { 
+	@RequestMapping(value = {"/getProductsList"}, method = RequestMethod.GET)
+	public String getProductsList(HttpServletRequest request, ModelMap model) { 
 		List<Product> productList = productService.getAvailableProductList();
+		request.setAttribute("availableProductList", productList);
         return ViewConstants.INDEX;
 	}
+	
+	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.GET)
+	public String addProductOnLoad(ModelMap model) { 
+        return ViewConstants.ADD_PRODUCT;
+	}
+	
+	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST)
+	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") Product product, BindingResult bindingResult, ModelMap model, Errors errors) { 
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userCode", "required.userCode", "UserCode is required.");
+		
+		
+        return ViewConstants.ADD_PRODUCT;
+	}
 
+	@RequestMapping(value = {"/getProduct"}, method = RequestMethod.GET)
+	public String getProductsDetails(HttpServletRequest request, ModelMap model) { 
+		Product product = productService.findById(Integer.valueOf(request.getParameter("productId")));
+		request.setAttribute("detailProduct", product);
+        return ViewConstants.PRODUCT_DETAIL;
+	}
+	
 }

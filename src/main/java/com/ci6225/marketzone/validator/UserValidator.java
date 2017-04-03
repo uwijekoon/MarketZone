@@ -38,7 +38,7 @@ public class UserValidator implements Validator{
 
 		
 
-		if(user.getConfirmPassword() != null && !(user.getPassword().equals(user.getConfirmPassword()))){
+		if(user.getConfirmPassword() != "" && !(user.getPassword().equals(user.getConfirmPassword()))){
 			errors.rejectValue("confirmPassword", "Notmatch.userForm.password", "Confirm password does not match with password");
 		}
 		if(user.getUserType() != 0 && !(user.getUserType() == 1 || user.getUserType() == 2)){
