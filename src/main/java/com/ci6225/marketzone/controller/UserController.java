@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.service.UserService;
 
@@ -30,7 +31,7 @@ public class UserController {
 	
 	private static final String VIEW_INDEX = "index";
 	private static final String VIEW_REGISTER = "register";
-	private static final String VIEW_BUYER = "redirect:/product/GetProductsList";
+	private static final String VIEW_BUYER = "redirect:/product/getProductsList";
 	private static final String VIEW_SELLER = "productList";
 	private static final int USER_TYPE_BUYER = 1;
 	private static final int USER_TYPE_SELLER = 2;

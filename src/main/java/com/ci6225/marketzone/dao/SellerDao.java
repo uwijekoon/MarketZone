@@ -16,7 +16,7 @@ public class SellerDao extends AbstractDao<Integer, Seller>{
     }
 	
 	public void saveSeller(Seller seller) {
-        persist(seller);
+		 persist(seller);
     }
 
 	@SuppressWarnings("unchecked")
