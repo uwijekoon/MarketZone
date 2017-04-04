@@ -15,8 +15,11 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ci6225.marketzone.model.Product;
+import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.service.ProductService;
 import com.ci6225.marketzone.util.ViewConstants;
 
@@ -39,11 +42,12 @@ public class ProductController {
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.GET)
 	public String addProductOnLoad(ModelMap model) { 
+		model.put("productForm", new Product());
         return ViewConstants.ADD_PRODUCT;
 	}
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST)
-	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") Product product, BindingResult bindingResult, ModelMap model, Errors errors) { 
+	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") Product product, BindingResult bindingResult, ModelMap model, Errors errors, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) { 
 
         return ViewConstants.ADD_PRODUCT;
 	}

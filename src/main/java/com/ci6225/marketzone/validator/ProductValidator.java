@@ -27,26 +27,11 @@ public class ProductValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "required.description", "Description is required.");
 		
 		if(product.getQuantity() < 0) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "quantity", "NotEmpty.userForm.shopName", "ShopName field is required.");
+			errors.rejectValue("quantity", "quantity.minAmount", "Please enter valid quantity");
 		}
-		
-		
-		/*if(user.getUserType() != 0 && user.getUserType()==2) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shopName", "NotEmpty.userForm.shopName", "ShopName field is required.");
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "NotEmpty.userForm.description", "Description field is required.");
+		if(product.getUnitPrice() < 0) {
+			errors.rejectValue("unitPrice", "unitPrice.minAmount", "Please enter valid unitPrice");
 		}
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","required.confirmPassword", "Confirm Password is required.");
-
-		
-
-		if(user.getConfirmPassword() != "" && !(user.getPassword().equals(user.getConfirmPassword()))){
-			errors.rejectValue("confirmPassword", "Notmatch.userForm.password", "Confirm password does not match with password");
-		}
-		if(user.getUserType() != 0 && !(user.getUserType() == 1 || user.getUserType() == 2)){
-			errors.rejectValue("userType", "Notmatch.userForm.userType", "Please select user type.");
-		}*/
 		
 	}
 
