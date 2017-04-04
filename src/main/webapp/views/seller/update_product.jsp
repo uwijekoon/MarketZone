@@ -1,3 +1,7 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<spring:url value="/" var="basedURL" />
+<spring:url value="/themes/images" var="themeImg" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
     <jsp:include page="/views/common/menu.jsp"></jsp:include>
@@ -47,13 +51,6 @@
         </section>			
     <jsp:include page="/views/common/footer.jsp"></jsp:include>
     </div>
-    <script src="${pageContext.request.contextPath}/themes/js/common.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#checkout').click(function (e) {
-            document.location.href = "checkout.html";
-        })
-    });
-</script>		
+    <script src="${basedURL}/themes/js/common.js"></script>		
 </body>
 </html>

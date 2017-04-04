@@ -3,6 +3,7 @@ package com.ci6225.marketzone.model;
 public class CartItem {
 	private Product product;
 	private int quantity;
+	
 	public Product getProduct() {
 		return product;
 	}
@@ -15,6 +16,8 @@ public class CartItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+		public double getAmount(){
+			return quantity * product.getUnitPrice();
+		}
 	
 }

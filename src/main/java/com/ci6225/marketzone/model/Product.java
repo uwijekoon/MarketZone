@@ -19,6 +19,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -31,15 +35,21 @@ public class Product {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private Integer id;
+	
+	@NotNull
+    @Size(min=2, max=30)
 	@Column(name="name")
     private String name;
 	@Column(name="description")
     private String description;
+	
+	@NotNull
+    @Min(1)
 	@Column(name="quantity")
-    private int quantity;
+    private Integer quantity;
 	@Column(name="unit_price")
-    private float unitPrice;
+    private Float unitPrice;
 	@Column(name="image_path")
     private String image;
 	@Column(name="delete_flag")
@@ -48,12 +58,15 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="seller_id", nullable = false)
     private Seller seller;
-
-    public int getId() {
+	
+	@Transient
+	private byte[] imageFile;
+	
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,23 +86,21 @@ public class Product {
         this.description = description;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public float getUnitPrice() {
+    public Float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(float unitPrice) {
+    public void setUnitPrice(Float unitPrice) {
         this.unitPrice = unitPrice;
     }
-
-   
 
     public Seller getSeller() {
         return seller;
@@ -113,6 +124,14 @@ public class Product {
 
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
+	}
+
+	public byte[] getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(byte[] imageFile) {
+		this.imageFile = imageFile;
 	}
 
 }

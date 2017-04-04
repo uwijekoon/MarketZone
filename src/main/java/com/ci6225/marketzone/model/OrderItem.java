@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -24,8 +26,6 @@ public class OrderItem {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Column(name="product_id")
-    private int productId;
 	@Column(name="order_id")
     private int orderId;
 	@Column(name="quantity")
@@ -33,17 +33,11 @@ public class OrderItem {
 	@Column(name="amount")
     private float amount;
 	
+	@OneToOne
+	@PrimaryKeyJoinColumn
     private Product product;
 
     
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -53,7 +47,7 @@ public class OrderItem {
     }
 
     public float getAmount() {
-        return amount;
+        return quantity * product.getUnitPrice();
     }
 
     public void setAmount(float amount) {

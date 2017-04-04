@@ -32,7 +32,7 @@ function updateCart(){
         quantityList += idSplit[1]+ "-" + $(this).val();
     });
     var data = {quantityList:quantityList};
-    sendAjax("POST", "UpdateCart", data, updateCartSuccess, updateCartFailed);
+    sendAjax("POST", "updateCart", data, updateCartSuccess, updateCartFailed);
 }
 
 function updateCartSuccess(data){

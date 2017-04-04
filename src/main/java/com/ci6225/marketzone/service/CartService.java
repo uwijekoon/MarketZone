@@ -1,11 +1,14 @@
 package com.ci6225.marketzone.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ci6225.marketzone.model.Cart;
+import com.ci6225.marketzone.model.OrderItem;
 
 @Service("cartService")
 @Transactional
@@ -21,6 +24,17 @@ public class CartService {
 		 request.getSession().removeAttribute("cart");
 	 }
 	 
+	 public void updateCartItems(Cart cart, List<Integer> quantityList) {
+	        int index = 0;
+	        for (OrderItem item : cart.getItemList()) {
+	            item.setQuantity(quantityList.get(index));
+	            index++;
+	        }
+	    }
+	 
+	 public void checkout(Cart cart){
+		 
+	 }
 	
 	
 }

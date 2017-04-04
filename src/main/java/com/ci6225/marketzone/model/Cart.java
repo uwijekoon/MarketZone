@@ -6,18 +6,18 @@ import java.util.List;
 
 public class Cart implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private List<CartItem> itemList = new ArrayList<>();
+	private List<OrderItem> itemList = new ArrayList<>();
 
-	public List<CartItem> getItemList() {
+	public List<OrderItem> getItemList() {
 		return itemList;
 	}
 
-	public void setItemList(List<CartItem> itemList) {
+	public void setItemList(List<OrderItem> itemList) {
 		this.itemList = itemList;
 	}
 	
 	 public void addItemsToCart(Product product, int quantity){
-		 CartItem item = new CartItem();
+		 OrderItem item = new OrderItem();
 		 item.setProduct(product);
 		 item.setQuantity(quantity);
 		 itemList.add(item);
@@ -33,7 +33,7 @@ public class Cart implements Serializable{
 		 
 	 public double getSubTotal(){
 		 double subTotal = 0;
-		 for(CartItem item : itemList){
+		 for(OrderItem item : itemList){
 			 subTotal += item.getQuantity() * item.getProduct().getUnitPrice();
 		 }
 		 return subTotal;

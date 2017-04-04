@@ -12,15 +12,15 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="item" items="${cart.cartItems}" varStatus="index">
+        <c:forEach var="item" items="${cart.itemList}" varStatus="index">
             <tr>
                 <td>
                     <!--<button type="button" class="btn btn-danger btn-lg" id="removeItem_${index.index}" onclick="removeCartItem(${index.index})"><span class="glyphicon glyphicon-remove"></span></button>-->
                 </td>
-                <td><a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${item.productIndex}">
+                <td><a href="${pageContext.request.contextPath}/ViewProduct?productId=${item.product.id}">
                         <c:choose>
                             <c:when test="${not empty item.product.image}">
-                                <img src="${pageContext.request.contextPath}/Images/${item.product.seller.userId}/${item.product.image}" class="product-cart-img"/>
+                                <img src="${pageContext.request.contextPath}/Images/${item.product.seller.id}/${item.product.image}" class="product-cart-img"/>
                             </c:when>
                             <c:otherwise>
                                 <img src="${pageContext.request.contextPath}/themes/images/no_image.png" class="product-cart-img"/>
@@ -40,14 +40,14 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td><strong><fmt:formatNumber value="${cart.totalPrice}" type="currency"/></strong></td>
+            <td><strong><fmt:formatNumber value="${cart.subTotal}" type="currency"/></strong></td>
         </tr>		  
     </tbody>
 </table>
 
 <hr>
 <p class="cart-total right">
-    <strong>Sub-Total</strong>:	<fmt:formatNumber value="${cart.totalPrice}" type="currency"/><br>
+    <strong>Sub-Total</strong>:	<fmt:formatNumber value="${cart.subTotal}" type="currency"/><br>
     <strong>Admin Fee</strong>: <fmt:formatNumber value="${cart.adminFee}" type="currency"/><br>
-    <strong>Total</strong>: <fmt:formatNumber value="${cart.cartTotal}" type="currency"/><br>
+    <strong>Total</strong>: <fmt:formatNumber value="${cart.total}" type="currency"/><br>
 </p>

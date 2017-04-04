@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<spring:url value="/" var="basedURL" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
     <jsp:include page="/views/common/menu.jsp"></jsp:include>
@@ -64,7 +67,7 @@
                         </div>
                     </c:if>
                     <c:if test="${sessionScope.user != null}">
-                        <form action="${pageContext.request.contextPath}/ConfirmOrder" method="post">
+                    <form:form action="${basedURL}cart/checkout" method="post"  commandName="orderForm">  
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Account &amp; Billing Details</a>
@@ -164,7 +167,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </form:form>
                     </c:if>
                 </div>				
             </div>

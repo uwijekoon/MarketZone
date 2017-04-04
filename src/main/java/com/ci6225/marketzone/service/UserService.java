@@ -59,7 +59,7 @@ public class UserService {
 		User user = userDao.findByUserCode(userCode);
 		String userPass = PasswordUtil.getSecurePassword(password, user.getSalt());
 		
-		if(user.getPassword().equals(userPass)) {
+		if(user != null && user.getPassword().equals(userPass)) {
 			return user;
 		}
 		return null;
