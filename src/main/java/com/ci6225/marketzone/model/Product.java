@@ -6,6 +6,8 @@
 package com.ci6225.marketzone.model;
 
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,6 +54,18 @@ public class Product {
 	@Column(name="delete_flag")
 	private char deleted;
 	
+	@Column(name="create_time")
+	private Date createTime;
+	
+	@Column(name="update_time")
+	private Date updateTime;
+	
+	@Column(name="created_by")
+	private int createdBy;
+	
+	@Column(name="updated_by")
+	private int updatedBy;
+
 	@ManyToOne
 	@JoinColumn(name="seller_id", nullable = false)
     private Seller seller;
@@ -129,6 +143,38 @@ public class Product {
 
 	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 }
