@@ -1,5 +1,6 @@
 package com.ci6225.marketzone.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
@@ -15,8 +16,9 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="USER")
-public class User {
-	
+public class User implements Serializable{
+	private static final long serialVersionUID = 3982457734002264841L;
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)

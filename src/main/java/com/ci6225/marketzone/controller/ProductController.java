@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ci6225.marketzone.model.CartItem;
 import com.ci6225.marketzone.model.Product;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.service.ProductService;
@@ -41,7 +42,7 @@ public class ProductController {
 	public String getProductsList(HttpServletRequest request, ModelMap model) { 
 		List<Product> productList = productService.getAvailableProductList();
 		request.setAttribute("availableProductList", productList);
-        return ViewConstants.INDEX;
+        return ViewConstants.VIEW_INDEX;
 	}
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.GET)
@@ -84,11 +85,14 @@ public class ProductController {
 		
         //return ViewConstants.ADD_PRODUCT;
 	}
+	
 
 	@RequestMapping(value = {"/getProduct"}, method = RequestMethod.GET)
 	public String getProductsDetails(HttpServletRequest request, ModelMap model) { 
 		Product product = productService.findById(Integer.valueOf(request.getParameter("productId")));
-		request.setAttribute("detailProduct", product);
+		CartItem item = new CartItem();
+		item.setProduct(product);
+		model.put("cartItemForm", item);
         return ViewConstants.PRODUCT_DETAIL;
 	}
 	
