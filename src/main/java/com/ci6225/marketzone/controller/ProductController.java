@@ -47,6 +47,48 @@ public class ProductController {
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST)
 	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") Product product, BindingResult bindingResult, ModelMap model, Errors errors, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) { 
+	
+	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.GET)
+	public String addProductOnLoad(ModelMap model) { 
+		model.put("productForm", new Product());
+        return ViewConstants.ADD_PRODUCT;
+	}
+	
+	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST)
+	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") @Validated Product product, BindingResult bindingResult, ModelMap model, 
+			Errors errors, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+		
+		String imagePath ="/Users/asankalakmal/Desktop/MarketZoneImages";
+		
+		if (bindingResult.hasErrors()) {
+	         logger.error("Validation");
+	         model.put("productForm", new Product());
+	         return ViewConstants.ADD_PRODUCT;
+	      } else {            
+	         
+	    	  try {
+	    		  MultipartFile multipartFile = product.getImageFile();
+	 	         String uploadPath = imagePath + File.separator + File.separator;
+	 	         //Now do something with file...
+	 	         FileCopyUtils.copy(product.getImageFile().getBytes(), new File(uploadPath + product.getImageFile().getOriginalFilename()));
+	 	         String fileName = multipartFile.getOriginalFilename();
+	 	         model.addAttribute("fileName", fileName);
+	 	         logger.info("Uploaded image name:"+fileName);
+	 	         product.setImage(fileName);
+	 	         productService.saveProduct(product);
+	    		  
+	    	  } catch(IOException ex) {
+	    		  logger.error("Product image upload failed:"+ex);
+	    	  }
+	    	  
+	    	  return "redirect:/";
+	         
+	      }
+		
+		
+        //return ViewConstants.ADD_PRODUCT;
+	}
+	
 
         return ViewConstants.ADD_PRODUCT;
 	}

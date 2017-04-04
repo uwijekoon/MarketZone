@@ -18,7 +18,7 @@
                                 <label class="control-label"><span class="required">*</span> Name</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Product Name" path="name" id="name" class="input-xlarge" />
-                                    <form:errors path="name" cssclass="form-error"></form:errors>
+                                    <form:errors path="name" class="form-error"></form:errors>
                                 </div>
                             </div>
                             
@@ -26,26 +26,26 @@
                                 <label class="control-label"><span class="required">*</span> Unit Price</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Unit Price" id="unitPrice" path="unitPrice" class="input-xlarge"/>
-                                    <form:errors path="unitPrice" cssclass="form-error"></form:errors>
+                                    <form:errors path="unitPrice" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Quantity</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Quantity" id="quantity" path="quantity" class="input-xlarge"/>
-                                    <form:errors path="quantity" cssclass="form-error"></form:errors>
+                                    <form:errors path="quantity" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Description</label>
                                     <form:textarea type="text" placeholder="Product Description" path="description" class="input-xlarge"/>
-                                    <form:errors path="description" cssclass="form-error"></form:errors>
+                                    <form:errors path="description" class="form-error"></form:errors>
                              </div>
                             <div class="control-group file-upload">
                                 <label class="control-label">Product Image</label>
                                 <div class="controls">
                                     <input type="file" placeholder="Quantity" id="quantity" name=imageFile class="input-xlarge">
-                                    <form:errors path="imageFile" cssclass="form-error"></form:errors>
+                                    <form:errors path="imageFile" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">

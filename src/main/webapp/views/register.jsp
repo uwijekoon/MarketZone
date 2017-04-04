@@ -20,14 +20,14 @@
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your username" path="userCode" id="userCode" class="input-xlarge"/>
                                 </div>
-                                <form:errors path="userCode" cssclass="form-error"></form:errors>
+                                <form:errors path="userCode" class="form-error"></form:errors>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Password</label>
                                 <div class="controls">
                                     <form:input type="password" placeholder="Enter your password" id="password" path="password" class="input-xlarge"/>
                                 </div>
-                                <form:errors path="password" cssclass="form-error"></form:errors>
+                                <form:errors path="password" class="form-error"></form:errors>
                             </div>
                             <div class="control-group">
                                 <input tabindex="3" class="btn btn-inverse large" type="submit" value="Sign into your account"/>
@@ -50,41 +50,41 @@
                                     <form:radiobutton path="userType" class="input-xlarge" value="1"/>
                                 </div>
                                 <label class="control-label">I am a Buyer</label>
-                                <form:errors path="userType" cssclass="form-error"></form:errors>
+                                <form:errors path="userType" class="form-error"></form:errors>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Username</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your username" path="userCode" class="input-xlarge"/>
-                                    <form:errors path="userCode" cssclass="form-error"></form:errors>
+                                    <form:errors path="userCode" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> First Name:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your First name" path="firstName" class="input-xlarge"/>
-                                    <form:errors path="firstName" cssclass="form-error"></form:errors>
+                                    <form:errors path="firstName" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Last Name:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your last name" path="lastName" class="input-xlarge" />
-                                    <form:errors path="lastName" cssclass="form-error"></form:errors>
+                                    <form:errors path="lastName" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"> <span class="required">*</span> Email address:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your email" path="email" class="input-xlarge"/>
-                                    <form:errors path="email" cssclass="form-error"></form:errors>
+                                    <form:errors path="email" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Phone:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your phone" path="phone" class="input-xlarge"/>
-                                    <form:errors path="phone" cssclass="form-error"></form:errors>
+                                    <form:errors path="phone" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -95,14 +95,14 @@
 									  <form:option value="" label="--- Select ---" />
 									  <form:options items="${countryList}" />
 								     </form:select>
-                                     <form:errors path="country" cssclass="form-error"></form:errors>
+                                     <form:errors path="country" class="form-error"></form:errors>
                                 </div>
                             </div>
                            <div class="control-group seller-field ${userType=='2' ? 'show' : 'hide'}">
                                 <label class="control-label"><span class="required">*</span> Shop Name:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your Shop Name" path="shopName" class="input-xlarge"/>
-                                    <form:errors path="shopName" cssclass="form-error"></form:errors>
+                                    <form:errors path="shopName" class="form-error"></form:errors>
                                 </div> 
                                 
                             </div>
@@ -110,7 +110,7 @@
                                 <label class="control-label"><span class="required">*</span> Description:</label>
                                 <div class="controls">
                                     <form:textarea type="text" placeholder="Enter your Description" path="description" class="input-xlarge"/>
-                                    <form:errors path="description" cssclass="form-error"></form:errors>
+                                    <form:errors path="description" class="form-error"></form:errors>
                                 </div>
                                 
                             </div>
@@ -118,14 +118,14 @@
                                 <label class="control-label"><span class="required">*</span> Password:</label>
                                 <div class="controls">
                                     <form:input type="password" placeholder="Enter your password" path="password" class="input-xlarge"/>
-                                    <form:errors path="password" cssclass="form-error"></form:errors>
+                                    <form:errors path="password" class="form-error"></form:errors>
                                 </div>
                             </div>	
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Confirm Password:</label>
                                 <div class="controls">
                                     <form:input type="password" placeholder="Enter your password" path="confirmPassword" class="input-xlarge"/>
-                                    <form:errors path="confirmPassword" cssclass="form-error"></form:errors>
+                                    <form:errors path="confirmPassword" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <hr>

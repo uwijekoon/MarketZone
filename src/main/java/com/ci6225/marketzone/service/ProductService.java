@@ -24,5 +24,8 @@ public class ProductService {
 		return productDao.findAvailableProducts();
 	}
 	
+	public void saveProduct(Product product) {
+		productDao.persist(product);
+	}
 	
 }

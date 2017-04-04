@@ -5,24 +5,21 @@
  */
 package com.ci6225.marketzone.model;
 
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -60,7 +57,7 @@ public class Product {
     private Seller seller;
 	
 	@Transient
-	private byte[] imageFile;
+	private MultipartFile imageFile;
 	
     public Integer getId() {
         return id;
@@ -126,11 +123,11 @@ public class Product {
 		this.deleted = deleted;
 	}
 
-	public byte[] getImageFile() {
+	public MultipartFile getImageFile() {
 		return imageFile;
 	}
 
-	public void setImageFile(byte[] imageFile) {
+	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
 	}
 
