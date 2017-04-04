@@ -21,7 +21,7 @@ public class UserValidator implements Validator{
 		User user = (User)target;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userType", "NotEmpty.userForm.userType", "Please select the user typre.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userCode", "NotEmpty.userForm.userCode", "User Name field is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userCode", "NotEmpty.userForm.userCode", "//User Name field is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.userForm.firstName", "First Name field is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.userForm.lastName", "Last Name field is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "NotEmpty.userForm.phone", "Phone field is required.");
@@ -38,7 +38,7 @@ public class UserValidator implements Validator{
 
 		
 
-		if(user.getConfirmPassword() != null && !(user.getPassword().equals(user.getConfirmPassword()))){
+		if(user.getConfirmPassword() != "" && !(user.getPassword().equals(user.getConfirmPassword()))){
 			errors.rejectValue("confirmPassword", "Notmatch.userForm.password", "Confirm password does not match with password");
 		}
 		if(user.getUserType() != 0 && !(user.getUserType() == 1 || user.getUserType() == 2)){
