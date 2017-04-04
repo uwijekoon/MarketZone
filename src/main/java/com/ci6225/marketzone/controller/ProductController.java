@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+<<<<<<< HEAD
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+=======
+>>>>>>> branch 'master' of https://github.com/uwijekoon/MarketZone.git
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.ci6225.marketzone.model.OrderItem;
 import com.ci6225.marketzone.model.Product;
@@ -38,6 +39,7 @@ public class ProductController {
 		request.setAttribute("availableProductList", productList);
         return ViewConstants.VIEW_INDEX;
 	}
+<<<<<<< HEAD
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.GET)
 	public String addProductOnLoad(ModelMap model) { 
@@ -89,6 +91,8 @@ public class ProductController {
         //return ViewConstants.ADD_PRODUCT;
 	}
 	
+=======
+>>>>>>> branch 'master' of https://github.com/uwijekoon/MarketZone.git
 
         return ViewConstants.ADD_PRODUCT;
 	}
