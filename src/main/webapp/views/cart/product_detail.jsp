@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<spring:url value="/" var="basedURL" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
     <jsp:include page="/views/common/menu.jsp"></jsp:include>
@@ -14,8 +17,8 @@
                     <div class="span4 product-detail-box">
                         <c:choose>
                             <c:when test="${not empty detailProduct.image}">
-                                <a href="${pageContext.request.contextPath}/Images/${detailProduct.seller.id}/${detailProduct.image}" class="thumbnail" data-fancybox-group="group1" title="Description 1">
-                                <img alt="" src="${pageContext.request.contextPath}/Images/${detailProduct.seller.id}/${detailProduct.image}" class="product-detail-image"></a> 
+                                <a href="${pageContext.request.contextPath}/Images/${cartItemForm.product.seller.id}/${cartItemForm.product.image}" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                                <img alt="" src="${pageContext.request.contextPath}/Images/${cartItemForm.product.seller.id}/${cartItemForm.product.image}" class="product-detail-image"></a> 
                             </c:when>
                             <c:otherwise>
                                 <a href="${pageContext.request.contextPath}/themes/images/no_image.png" class="thumbnail" data-fancybox-group="group1" title="Description 1">
@@ -39,26 +42,26 @@
                     </div>
                     <div class="span5">
                         <address>
-                            <strong>Seller:</strong> <span>${detailProduct.seller.name}</span><br>
-                            <strong>Product Name:</strong> <span>${detailProduct.name}</span><br>
+                            <strong>Seller:</strong> <span>${cartItemForm.product.seller.name}</span><br>
+                            <strong>Product Name:</strong> <span>${cartItemForm.product.name}</span><br>
                             <strong>Availability:</strong> 
-                            <c:if test="${detailProduct.quantity == 0}">
+                            <c:if test="${cartItemForm.product.quantity == 0}">
                                 <span class="red_font">Out Of Stock</span><br>
                             </c:if>
-                            <c:if test="${detailProduct.quantity != 0}">
-                                <span>${detailProduct.quantity} units available</span><br>
+                            <c:if test="${cartItemForm.product.quantity != 0}">
+                                <span>${cartItemForm.product.quantity} units available</span><br>
                             </c:if>
                         </address>									
-                        <h4><strong>Price: <fmt:formatNumber value="${detailProduct.unitPrice}" type="currency"/></strong></h4>
+                        <h4><strong>Price: <fmt:formatNumber value="${cartItemForm.product.unitPrice}" type="currency"/></strong></h4>
                     </div>
                     <div class="span5">
-                        <form class="form-inline" action="${pageContext.request.contextPath}/AddItem" method="post">    
-                            <input type="hidden" name="productIndex" value="${productIndex}"/>
+                        <form:form action="${basedURL}cart/addItem" method="post"  commandName="cartItemForm">  
+                        	<form:input type="hidden" path="product.id" id="productId" class="input-xlarge" value="${product.id}"/>  
                             <p>&nbsp;</p>
                             <label>Qty:</label>
-                            <input type="text" class="span1" name="quantity" id="quantity">
-                            <button class="btn btn-inverse" type="submit">Add to cart</button>
-                        </form>
+                            <form:input type="text" path="quantity" id="quantity" class="input-xlarge"/>
+                            <form:button class="btn btn-inverse" type="submit">Add to cart</form:button>
+                        </form:form>
                     </div>							
                 </div>
                 <div class="row">
@@ -68,9 +71,9 @@
                             <li class=""><a href="#profile">Seller Details</a></li>
                         </ul>							 
                         <div class="tab-content">
-                            <div class="tab-pane active" id="home">${detailProduct.description}</div>
+                            <div class="tab-pane active" id="home">${cartItemForm.product.description}</div>
                             <div class="tab-pane" id="profile">
-                                ${detailProduct.seller.description}
+                                ${cartItemForm.product.seller.description}
                             </div>
                         </div>							
                     </div>						

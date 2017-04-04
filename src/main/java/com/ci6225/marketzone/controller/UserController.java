@@ -94,7 +94,7 @@ public class UserController {
         	User dbUser = userService.userLogin(user.getUserCode(), user.getPassword());
         	
         	if(dbUser != null) {
-        		request.setAttribute("user", dbUser);
+        		request.getSession().setAttribute("user", dbUser);
 	        	if(USER_TYPE_BUYER == dbUser.getUserType()) {
 	        		return VIEW_BUYER;
 	        	} else if(USER_TYPE_SELLER == dbUser.getUserType()) {
