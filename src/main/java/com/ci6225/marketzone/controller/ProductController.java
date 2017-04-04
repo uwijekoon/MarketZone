@@ -1,5 +1,7 @@
 package com.ci6225.marketzone.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,9 +51,38 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST)
-	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") Product product, BindingResult bindingResult, ModelMap model, Errors errors, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) { 
-
-        return ViewConstants.ADD_PRODUCT;
+	public String addProduct(HttpServletRequest request, @ModelAttribute("productForm") @Validated Product product, BindingResult bindingResult, ModelMap model, 
+			Errors errors, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+		
+		String imagePath ="/Users/asankalakmal/Desktop/MarketZoneImages";
+		
+		if (bindingResult.hasErrors()) {
+	         logger.error("Validation");
+	         model.put("productForm", new Product());
+	         return ViewConstants.ADD_PRODUCT;
+	      } else {            
+	         
+	    	  try {
+	    		  MultipartFile multipartFile = product.getImageFile();
+	 	         String uploadPath = imagePath + File.separator + File.separator;
+	 	         //Now do something with file...
+	 	         FileCopyUtils.copy(product.getImageFile().getBytes(), new File(uploadPath + product.getImageFile().getOriginalFilename()));
+	 	         String fileName = multipartFile.getOriginalFilename();
+	 	         model.addAttribute("fileName", fileName);
+	 	         logger.info("Uploaded image name:"+fileName);
+	 	         product.setImage(fileName);
+	 	         productService.saveProduct(product);
+	    		  
+	    	  } catch(IOException ex) {
+	    		  logger.error("Product image upload failed:"+ex);
+	    	  }
+	    	  
+	    	  return "redirect:/";
+	         
+	      }
+		
+		
+        //return ViewConstants.ADD_PRODUCT;
 	}
 
 	@RequestMapping(value = {"/getProduct"}, method = RequestMethod.GET)
