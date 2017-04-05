@@ -21,12 +21,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="item" items="${order.cartItems}" varStatus="index">
+                        <c:forEach var="item" items="${order.orderItems}" varStatus="index">
                             <tr>
-                                <td><a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${item.productIndex}">
+                                <td><a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${item.product.id}">
                                     <c:choose>
                                         <c:when test="${not empty item.product.image}">
-                                            <img src="${pageContext.request.contextPath}/Images/${item.product.seller.userId}/${item.product.image}" class="product-cart-img"/>
+                                            <img src="${pageContext.request.contextPath}/Images/${item.product.seller.id}/${item.product.image}" class="product-cart-img"/>
                                         </c:when>
                                         <c:otherwise>
                                             <img src="${pageContext.request.contextPath}/themes/images/no_image.png" class="product-cart-img"/>
@@ -36,7 +36,7 @@
                                 </td>
                                 <td>${item.product.name}</td>
                                 <td>${item.quantity}</td>
-                                <td><fmt:formatNumber value="${item.product.unitPrice}" type="currency"/></td>
+                                <td><fmt:formatNumber value="${item.unitPrice}" type="currency"/></td>
                                 <td><fmt:formatNumber value="${item.amount}" type="currency"/></td>
                             </tr>
                         </c:forEach>
@@ -45,16 +45,16 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td><strong><fmt:formatNumber value="${order.totalPrice}" type="currency"/></strong></td>
+                            <td><strong><fmt:formatNumber value="${order.subTotal}" type="currency"/></strong></td>
                         </tr>		  
                     </tbody>
                 </table>
 
                 <hr>
                 <p class="cart-total right">
-                    <strong>Sub-Total</strong>:	<fmt:formatNumber value="${order.totalPrice}" type="currency"/><br>
+                    <strong>Sub-Total</strong>:	<fmt:formatNumber value="${order.subTotal}" type="currency"/><br>
                     <strong>Admin Fee</strong>: <fmt:formatNumber value="${order.adminFee}" type="currency"/><br>
-                    <strong>Total</strong>: <fmt:formatNumber value="${order.cartTotal}" type="currency"/><br>
+                    <strong>Total</strong>: <fmt:formatNumber value="${order.total}" type="currency"/><br>
                 </p>
                 <hr/>					
             </div>

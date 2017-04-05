@@ -7,14 +7,17 @@ package com.ci6225.marketzone.model;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
@@ -69,6 +72,9 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="seller_id", nullable = false)
     private Seller seller;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	private List<OrderItem> orderItems;
 	
 	@Transient
 	private MultipartFile imageFile;
@@ -175,6 +181,14 @@ public class Product {
 
 	public void setUpdatedBy(int updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 }

@@ -7,6 +7,9 @@ import java.security.SecureRandom;
 
 import org.springframework.stereotype.Service;
 
+import com.ci6225.marketzone.model.Order;
+import com.ci6225.marketzone.model.OrderItem;
+import com.ci6225.marketzone.model.Product;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -33,7 +36,7 @@ public class PDFGenerator  extends PdfPageEventHelper{
 	private final Font titlefont = FontFactory.getFont("sans-serif", 16, Font.BOLD, BaseColor.BLACK);
 	private final Font subtitlefont = FontFactory.getFont("sans-serif", 10, Font.BOLD, BaseColor.BLACK);
 
-	public String generateOrderPdf(String rootUrl) throws Exception{
+	public String generateOrderPdf(String rootUrl, Order order) throws Exception{
 		String directory = Properties.getProperty("FILE_STORE_PATH");
 		String strFileName = getUniqueFileName(directory + "/pdf","pdf");
 		File outDir = new File(directory);
@@ -41,26 +44,20 @@ public class PDFGenerator  extends PdfPageEventHelper{
 			outDir.mkdirs();
 		}
 		File pdffile = new File(outDir,strFileName);
-
-
 		Document document = new Document(PageSize.A4, this.DEFAULT_DOCUMENT_LEFT_MARGIN,
 				this.DEFAULT_DOCUMENT_BOTTOM_MARGIN,
 				this.DEFAULT_DOCUMENT_RIGHT_MARGIN,
 				this.DEFAULT_DOCUMENT_TOP_MARGIN);
 		PdfWriter writer=PdfWriter.getInstance(document,new FileOutputStream(pdffile));
 		writer.setPageEvent(new PDFGenerator());
-
 		document.open();
-
-		PDFHeader(document, "11111", "CONFIRMED", "Clementi Avenue 5, Singapore", rootUrl);
-		PDFDetails(document);
-
+		PDFHeader(document, order.getId()+"", order.getOrderStatusStr(), order.getAddress(), rootUrl);
+		PDFDetails(document, order);
 		document.close();
-
 		return pdffile.getAbsolutePath() ;
 	}
 	
-	private void PDFDetails(Document document) throws Exception{
+	private void PDFDetails(Document document, Order order) throws Exception{
 		float[] colsWidth = {1f,3f,1f};
 		PdfPTable formattedTable = new PdfPTable(colsWidth);
 		formattedTable.setWidthPercentage(100);
@@ -69,28 +66,23 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		formattedTable.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 		formattedTable.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		formattedTable.addCell(getImageCell(Properties.getProperty("FILE_STORE_PATH")+"images/16/1489210988934.s7.jpeg"));
-		formattedTable.addCell(getTextCell("Item name 1"));
-		formattedTable.addCell(getAmountCell("SGD 37.00"));
-		formattedTable.addCell(getTextCell("Qty: 2"));
-		formattedTable.addCell(getTextCell("Seller: Seller 1"));
-		
-		
-		formattedTable.addCell(getImageCell(Properties.getProperty("FILE_STORE_PATH")+"images/18/1489231256138.specs_gold.jpg"));
-		formattedTable.addCell(getTextCell("Item name 2"));
-		formattedTable.addCell(getAmountCell("SGD 37.00"));
-		formattedTable.addCell(getTextCell("Qty: 1"));
-		formattedTable.addCell(getTextCell("Seller: Seller 2"));
-		
+		for(OrderItem item : order.getOrderItems()){
+			Product product = item.getProduct();
+			formattedTable.addCell(getImageCell(Properties.getProperty("FILE_STORE_PATH")+"images/"+product.getImage()));
+			formattedTable.addCell(getTextCell(product.getName()));
+			formattedTable.addCell(getAmountCell("SGD " + item.getAmount()));
+			formattedTable.addCell(getTextCell("Qty: " + item.getQuantity()));
+			formattedTable.addCell(getTextCell("Seller: " + product.getSeller().getName()));
+		}
 		formattedTable.addCell("");
 		formattedTable.addCell(getRightAlignedCell("Sub Total:"));
-		formattedTable.addCell(getTextCell("SGD 80.00"));
+		formattedTable.addCell(getTextCell(order.getSubTotal()+""));
 		formattedTable.addCell("");
 		formattedTable.addCell(getRightAlignedCell("Admin Fee:"));
-		formattedTable.addCell(getTextCell("SGD 0.80"));
+		formattedTable.addCell(getTextCell(order.getAdminFee()+""));
 		formattedTable.addCell("");
 		formattedTable.addCell(getRightAlignedCell("Total:"));
-		formattedTable.addCell(getTextCell("SGD 80.80"));
+		formattedTable.addCell(getTextCell(order.getTotal()+""));
 		
 		document.add(formattedTable);
 	}
@@ -150,7 +142,6 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		headerTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		headerTable.setHorizontalAlignment(Element.ALIGN_LEFT);
 
-
 		Image image = Image.getInstance(new URL(rootUrl+"/themes/images/logo.png"));
 		image.setScaleToFitLineWhenOverflow(true);
 		PdfPCell title1 = new PdfPCell(image);
@@ -168,7 +159,6 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		float[] f = {0.35f,1f};
 		PdfPTable subHeaderTable = new PdfPTable(f);
 		subHeaderTable.setHorizontalAlignment(Element.ALIGN_LEFT);
-		//subHeaderTable.setTotalWidth(1f);
 		subHeaderTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		subHeaderTable.getDefaultCell().setPaddingBottom(5f);
 		subHeaderTable.addCell(new Paragraph("Status: ", subtitlefont));

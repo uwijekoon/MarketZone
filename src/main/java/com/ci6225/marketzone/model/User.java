@@ -2,6 +2,8 @@ package com.ci6225.marketzone.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,9 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="USER")
@@ -77,6 +83,10 @@ public class User implements Serializable{
 	
 	@Transient
 	private String description;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@Fetch(FetchMode.SELECT)
+    private List<Order> orderList = new ArrayList<>();
 	
 	public int getId() {
 		return id;
@@ -191,6 +201,12 @@ public class User implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
 	}
 	
 

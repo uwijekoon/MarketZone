@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -26,17 +28,18 @@ public class OrderItem {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Column(name="order_id")
-    private int orderId;
 	@Column(name="quantity")
     private int quantity;
 	@Column(name="amount")
-    private float amount;
+    private double amount;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="product_id", nullable = false)
     private Product product;
-
+	
+	@ManyToOne
+	@JoinColumn(name="order_id", nullable = false, referencedColumnName="id")
+	Order order;
     
     public int getQuantity() {
         return quantity;
@@ -46,11 +49,11 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public float getAmount() {
-        return quantity * product.getUnitPrice();
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -70,12 +73,16 @@ public class OrderItem {
 		this.id = id;
 	}
 
-	public int getOrderId() {
-		return orderId;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public double getUnitPrice(){
+		return amount / quantity;
 	}
 
 }

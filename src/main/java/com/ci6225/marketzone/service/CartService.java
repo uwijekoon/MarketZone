@@ -28,13 +28,11 @@ public class CartService {
 	        int index = 0;
 	        for (OrderItem item : cart.getItemList()) {
 	            item.setQuantity(quantityList.get(index));
+	            item.setAmount(item.getQuantity() * item.getProduct().getUnitPrice());
 	            index++;
 	        }
 	    }
 	 
-	 public void checkout(Cart cart){
-		 
-	 }
 	
 	
 }

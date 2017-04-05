@@ -3,6 +3,7 @@ package com.ci6225.marketzone.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,38 +20,67 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ci6225.marketzone.model.Order;
 import com.ci6225.marketzone.model.OrderItem;
+import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.service.OrderService;
 import com.ci6225.marketzone.util.ViewConstants;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	
+
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
-	
+
 	@Autowired
 	@Qualifier("orderService")
 	private OrderService orderService;
-	
+
 	@RequestMapping(value = {"/downloadPdf"}, method = RequestMethod.GET)
-	public void addItem(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
+	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
 			BindingResult bindingResult, ModelMap model, Errors errors) { 
 		try{
 			String url = request.getRequestURL().toString();
 			String uri = request.getRequestURI();
 			String root = url.substring( 0, url.indexOf(uri) ) + request.getContextPath();
-			File pdf = new File(orderService.generatePdf(root));
-		InputStream inputStream = new FileInputStream(pdf);
-		IOUtils.copy(inputStream, response.getOutputStream());
-		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + pdf.getName() +"\""));
-		 
-	      response.flushBuffer();
+			int orderId = Integer.parseInt(request.getParameter("orderId"));
+			Order order = orderService.findById(orderId);
+			File pdf = new File(orderService.generatePdf(root, order));
+			response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + pdf.getName() +"\""));
+			InputStream inputStream = new FileInputStream(pdf);
+			IOUtils.copy(inputStream, response.getOutputStream());
+			response.setContentType("application/pdf");
+
+			response.flushBuffer();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		//return ViewConstants.INDEX;
+		return "";
+	}
+
+
+	@RequestMapping(value = {"/viewOrderHistory"}, method = RequestMethod.GET)
+	public String ViewOrderHistory(HttpServletRequest request) { 
+		try{
+			User user = (User)(request.getSession().getAttribute("user"));
+			List<Order> orderList = orderService.getOrderList(user);
+			request.setAttribute("orderList", orderList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ViewConstants.VIEW_ORDER_HISTORY;
+	}
+
+	@RequestMapping(value = {"/viewOrder"}, method = RequestMethod.GET)
+	public String ViewOrder(HttpServletRequest request) { 
+		try{
+			int id = Integer.parseInt(request.getParameter("orderId"));
+			Order order = orderService.findById(id);
+			request.setAttribute("order", order);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ViewConstants.VIEW_ORDER;
 	}
 
 }
