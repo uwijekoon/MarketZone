@@ -20,6 +20,7 @@ public class Cart implements Serializable{
 		 OrderItem item = new OrderItem();
 		 item.setProduct(product);
 		 item.setQuantity(quantity);
+		 item.setAmount(quantity * product.getUnitPrice()); 
 		 itemList.add(item);
 	 }
 	 

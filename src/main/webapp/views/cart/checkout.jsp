@@ -26,7 +26,7 @@
                                         <div class="span6">
                                             <h4>New Customer</h4>
                                             <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
-                                            <form action="${pageContext.request.contextPath}/register" method="post">
+                                            <form action="${pageContext.request.contextPath}/user/register" method="post">
                                                 <fieldset>
                                                     <label class="radio" for="register">
                                                         <input type="radio" name="account" value="register" id="register" checked="checked">Register Account
@@ -42,23 +42,27 @@
                                         <div class="span6">
                                             <h4>Returning Customer</h4>
                                             <p>I am a returning customer</p>
-                                            <form action="${pageContext.request.contextPath}/Login" method="post">
-                                                <fieldset>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Username</label>
-                                                        <div class="controls">
-                                                            <input type="text" placeholder="Enter your username" id="username" name="username" class="input-xlarge">
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Password</label>
-                                                        <div class="controls">
-                                                            <input type="password" placeholder="Enter your password" id="password" name="password" class="input-xlarge">
-                                                        </div>
-                                                    </div>
-                                                    <button class="btn btn-inverse">Continue</button>
-                                                </fieldset>
-                                            </form>
+                                           <form:form action="${basedURL}user/login" method="post" commandName="loginForm">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label">Username</label>
+                                <div class="controls">
+                                    <form:input type="text" placeholder="Enter your username" path="userCode" id="userCode" class="input-xlarge"/>
+                                </div>
+                                <form:errors path="userCode" class="form-error"></form:errors>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Password</label>
+                                <div class="controls">
+                                    <form:input type="password" placeholder="Enter your password" id="password" path="password" class="input-xlarge"/>
+                                </div>
+                                <form:errors path="password" class="form-error"></form:errors>
+                            </div>
+                            <div class="control-group">
+                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Continue"/>
+                            </div>
+                        </fieldset>
+                    </form:form>
                                         </div>
                                     </div>
 
@@ -145,17 +149,8 @@
                                                 </div>
 
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">Confirm Order</a>
-                                </div>
-                                <div id="collapseThree" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <div class="row-fluid">
+                                            
+                                             <div class="row-fluid">
                                             <div class="control-group">
                                                 <label for="textarea" class="control-label">Comments</label>
                                                 <div class="controls">
@@ -164,9 +159,11 @@
                                             </div>									
                                             <button class="btn btn-inverse pull-right">Confirm order</button>
                                         </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </form:form>
                     </c:if>
                 </div>				

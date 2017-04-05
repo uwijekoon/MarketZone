@@ -23,13 +23,14 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="order" items="${orderList}" varStatus="index">
-                                <tr class='clickable-row' data-href='${pageContext.request.contextPath}/ViewOrder?orderId=${order.id}'>
+                                <tr class='clickable-row' data-href='${pageContext.request.contextPath}/order/viewOrder?orderId=${order.id}'>
                                     <td>${order.id}</td>
                                     <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm a" value="${order.orderDate}" /></td>
-                                    <td><fmt:formatNumber value="${order.totalPrice}" type="currency"/></td>
+                                    <td><fmt:formatNumber value="${order.subTotal}" type="currency"/></td>
                                     <td><fmt:formatNumber value="${order.adminFee}" type="currency"/></td>
-                                    <td><fmt:formatNumber value="${order.cartTotal}" type="currency"/></td>
+                                    <td><fmt:formatNumber value="${order.total}" type="currency"/></td>
                                     <td>${order.comments}</td>
+                                    <td><a href="${pageContext.request.contextPath}/order/downloadPdf?orderId=${order.id}">Download PDF</a></td>
                                 </tr>
                                 </c:forEach>
                    	  

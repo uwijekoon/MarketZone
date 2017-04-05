@@ -30,8 +30,7 @@
                                 <!--<li><a href="#">My Account</a></li>-->
                                     <c:if test="${sessionScope.user.userType == 1}">
                                     <li><a href="${pageContext.request.contextPath}/cart/viewCart">Your Cart</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/ViewOrderHistory">Order History</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/order/downloadPdf">Download</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/order/viewOrderHistory">Order History</a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.user.userType == 2}">
                                     <li><a href="${pageContext.request.contextPath}/ViewProductList">Products</a></li>

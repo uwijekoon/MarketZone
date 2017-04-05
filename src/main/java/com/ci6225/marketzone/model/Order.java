@@ -9,14 +9,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.ci6225.marketzone.util.Constants;
 
 /**
  *
@@ -29,12 +34,8 @@ public class Order {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-    @Column(name="total_price")
-    private float totalPrice;
-    @Column(name="admin_fee")
-    private float adminFee;
-    @Column(name="cart_total")
-    private float cartTotal;
+    @Column(name="total_amount")
+    private double subTotal;
     @Column(name="first_name")
     private String firstName;
     @Column(name="last_name")
@@ -59,9 +60,15 @@ public class Order {
     private String comments;
     @Column(name="order_date")
     private Date orderDate;
+    @Column(name="status")
+    private int status = 1;
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade={CascadeType.ALL})
     private List<OrderItem> orderItems = new ArrayList<>();
+    
+    @ManyToOne
+	@JoinColumn(name="user_id", nullable = false)
+	User user;
 
     public int getId() {
         return id;
@@ -78,30 +85,6 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
-
-	public float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public float getAdminFee() {
-        return adminFee;
-    }
-
-    public void setAdminFee(float adminFee) {
-        this.adminFee = adminFee;
-    }
-
-    public float getCartTotal() {
-        return cartTotal;
-    }
-
-    public void setCartTotal(float cartTotal) {
-        this.cartTotal = cartTotal;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -198,5 +181,50 @@ public class Order {
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
+
+	public double getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
+	
+	public double getAdminFee(){
+		return subTotal * 0.01;
+	}
+	
+	public double getTotal(){
+		return getSubTotal() + getAdminFee();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public String getAddress(){
+		String address = address1;
+		if(address2 != null){
+			address += ", "+address2;
+		}
+		address += city + ", "+ country + "," + postalCode;
+		return address;
+	}
+	
+	public String getOrderStatusStr(){
+		String statusStr = "";
+		switch(status){
+		case Constants.ORDER_STATUS_CONFIRMED : 
+			statusStr = Constants.ORDER_STATUS_CONFIRMEDSTR;
+			break;
+		default:	
+			statusStr = "";
+		}
+		return statusStr;
+	}
 
 }
