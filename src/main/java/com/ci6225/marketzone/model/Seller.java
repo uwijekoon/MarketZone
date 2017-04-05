@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -38,6 +40,7 @@ public class Seller {
 	private User user;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+	@Fetch(FetchMode.SELECT)
 	private List<Product> productList;
 
 	public int getId() {

@@ -12,6 +12,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ci6225.marketzone.dao.ProductDao;
+import com.ci6225.marketzone.dao.SellerDao;
 import com.ci6225.marketzone.model.Product;
 import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
@@ -23,6 +24,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private SellerDao sellerDao;
 
 	public Product findById(int id) {
 		return productDao.findById(id);
@@ -32,8 +36,9 @@ public class ProductService {
 		return productDao.findAvailableProducts();
 	}
 	
+
 	public List<Product> getProductList(User seller) {
-		return productDao.findProducts(seller.getId());
+		return sellerDao.getProductList(seller.getId());
 	}
 
 	public boolean saveProduct(Product product, User seller) {

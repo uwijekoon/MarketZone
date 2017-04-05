@@ -32,8 +32,11 @@ public class SellerController {
 	@Qualifier("productService")
 	private ProductService productService;
 	
-	@RequestMapping(value = {"/productsList"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/productList"}, method = RequestMethod.GET)
 	public String getProductsList(HttpServletRequest request, ModelMap model) { 
+		
+		User user= (User)request.getSession().getAttribute("user");
+  	  	logger.info(String.valueOf(user.getId()));
 		List<Product> productList = productService.getProductList((User)request.getSession().getAttribute("user"));
 		request.setAttribute("productList", productList);
         return ViewConstants.SELLER_PRODUCT_LIST;
@@ -54,15 +57,21 @@ public class SellerController {
 	         model.put("productForm", new Product());
 	         return ViewConstants.ADD_PRODUCT;
 	      } else {
+	    	   
 	    	  if(productService.saveProduct(product,  (User)request.getSession().getAttribute("user"))) {
-	    		  redirectAttributes.addFlashAttribute("success", "Product added successfully!");
-	    		  return "redirect:/";
+	    		  redirectAttributes.addFlashAttribute("flashSuccess", "Product added successfully!");
+	    		  return "redirect:/seller/productList";
 	    	  } else {
-	    		  redirectAttributes.addFlashAttribute("error", "Product added successfully!");
-	    		  return "redirect:/";
+	    		  redirectAttributes.addFlashAttribute("flashError", "Some thing wrong in server!");
+	    		  return "redirect:/seller/addProduct";
 	    	  }
 	      }
 	}
 
+	@RequestMapping(value = {"/updateProduct"}, method = RequestMethod.GET)
+	public String updateProductOnLoad(ModelMap model) { 
+		model.put("productForm", new Product());
+        return ViewConstants.ADD_PRODUCT;
+	}
 	
 }

@@ -15,7 +15,7 @@
                         <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
                     </form>-->
                     <c:if test="${sessionScope.user.userType == 2}">
-                        <a href="${pageContext.request.contextPath}/ViewProductList" class="logo pull-left"><img src="${themeImg}/logo.png" class="site_logo" alt=""></a>
+                        <a href="${basedURL}/ViewProductList" class="logo pull-left"><img src="${themeImg}/logo.png" class="site_logo" alt=""></a>
                     </c:if>
                     <c:if test="${sessionScope.user.userType != 2}">
                         <a href="${basedURL}" class="logo pull-left"><img src="${themeImg}/logo.png" class="site_logo" alt=""></a>
@@ -29,19 +29,19 @@
                             <c:if test="${sessionScope.user != null}"><li>Welcome ${sessionScope.user.firstName} ${sessionScope.user.lastName} </li>
                                 <!--<li><a href="#">My Account</a></li>-->
                                     <c:if test="${sessionScope.user.userType == 1}">
-                                    <li><a href="${pageContext.request.contextPath}/cart/viewCart">Your Cart</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/ViewOrderHistory">Order History</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/order/downloadPdf">Download</a></li>
+                                    <li><a href="${basedURL}cart/viewCart">Your Cart</a></li>
+                                    <li><a href="${basedURL}ViewOrderHistory">Order History</a></li>
+                                    <li><a href="${basedURL}order/downloadPdf">Download</a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.user.userType == 2}">
-                                    <li><a href="${pageContext.request.contextPath}/ViewProductList">Products</a></li>
-                                    <!--<li><a href="${pageContext.request.contextPath}/ViewOrders">Order List</a></li>-->
-                                    <li><a href="${pageContext.request.contextPath}/addProduct">Add Product</a></li>
+                                    <li><a href="${basedURL}seller/productList">Products</a></li>
+                                    <!--<li><a href="${basedURL}/ViewOrders">Order List</a></li>-->
+                                    <li><a href="${basedURL}seller/addProduct">Add Product</a></li>
                                     </c:if>
-                                <li><a href="${basedURL}/auth/Logout">Logout</a></li>
+                                <li><a href="${basedURL}user/Logout">Logout</a></li>
 
                             </c:if>
-                            <c:if test="${sessionScope.user == null}"><li><a href="${basedURL}user/login">Login</a></li></c:if>
+                            <c:if test="${sessionScope.user == null}"><li><a href="${basedURL}user/login">Login/Register</a></li></c:if>
 
                         </ul>
                     </div>

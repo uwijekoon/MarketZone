@@ -54,13 +54,18 @@ public class UserService {
 		return userDao.findByUserCode(code);
 	}
 	
+	public User findByUserEmail(String email) {
+		return userDao.findByUserEmail(email);
+	}
+	
 	public User userLogin(String userCode, String password) {
 		
 		User user = userDao.findByUserCode(userCode);
-		String userPass = PasswordUtil.getSecurePassword(password, user.getSalt());
-		
-		if(user != null && user.getPassword().equals(userPass)) {
-			return user;
+		if(user != null) {
+			String userPass = PasswordUtil.getSecurePassword(password, user.getSalt());
+			if(user.getPassword().equals(userPass)) {
+				return user;
+			}
 		}
 		return null;
 	}

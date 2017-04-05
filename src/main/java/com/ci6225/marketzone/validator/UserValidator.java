@@ -4,12 +4,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
 import com.ci6225.marketzone.model.User;
 
 @Component
 public class UserValidator implements Validator{
-
+	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return User.class.isAssignableFrom(clazz);
@@ -34,9 +33,6 @@ public class UserValidator implements Validator{
 		}
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","required.confirmPassword", "Confirm Password is required.");
-
-		
 
 		if(user.getConfirmPassword() != "" && !(user.getPassword().equals(user.getConfirmPassword()))){
 			errors.rejectValue("confirmPassword", "Notmatch.userForm.password", "Confirm password does not match with password");
