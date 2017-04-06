@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
@@ -60,27 +62,42 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@ModelAttribute("userForm") @Validated User user, BindingResult bindingResult, ModelMap model) {
+	public String register(HttpServletRequest request, @ModelAttribute("userForm") @Validated User user, BindingResult bindingResult, ModelMap model, final RedirectAttributes redirectAttributes, Errors errors) {
         
+		if(!bindingResult.hasErrors()){
+			if(userService.findByUserCode(user.getUserCode()) != null) {
+				errors.rejectValue("userCode", "exists.userForm.userCode", "UserName already existes!");
+			}
+
+			if(userService.findByUserEmail(user.getEmail()) != null) {
+				errors.rejectValue("email", "exists.userForm.email", "Email already existes!");
+			}
+		}
+		
         if(bindingResult.hasErrors()) {
         	model.put("countryList", getCountryList());
         	model.put("userForm", user);
             model.put("loginForm", new User());
         	return VIEW_REGISTER;
         } else {
+
         	try{
         		userService.userRegister(user);
+        		redirectAttributes.addFlashAttribute("flashSuccess", "User added successfully!");
         		logger.info("User register successfully! userCode:"+user.getUserCode());
+        		return "redirect:/";
         	} catch(Exception e) {
         		logger.error("User Reigister error happen :"+ e);
-        		return VIEW_REGISTER;
+        		request.setAttribute("errorMessage", "Unknown Error!");
         	}
         	
-        	return VIEW_INDEX;
+        	model.put("countryList", getCountryList());
+        	model.put("userForm", user);
+        	model.put("loginForm", new User());
+    		return VIEW_REGISTER;
         }
 		
 	}
-
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, @ModelAttribute("loginForm") User user, BindingResult bindingResult, ModelMap model, Errors errors) {
@@ -88,19 +105,18 @@ public class UserController {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userCode", "required.userCode", "UserCode is required.");
 		
-		if(bindingResult.hasErrors()) {
-        	//Set errors
-        } else {
+		if(!bindingResult.hasErrors()) {
         	User dbUser = userService.userLogin(user.getUserCode(), user.getPassword());
-        	
         	if(dbUser != null) {
         		request.getSession().setAttribute("user", dbUser);
 	        	if(USER_TYPE_BUYER == dbUser.getUserType()) {
-	        		return VIEW_BUYER;
+	        		return "redirect:/";
 	        	} else if(USER_TYPE_SELLER == dbUser.getUserType()) {
-	        		return VIEW_SELLER;
+	        		return "redirect:/seller/productList";
 	        	}
-        	} 
+        	} else {
+        		request.setAttribute("errorMessage", "Invalid UserName or Password!");
+        	}
         }
 		
 		model.put("countryList", getCountryList());
@@ -110,6 +126,11 @@ public class UserController {
 		return VIEW_REGISTER;
 	}
 	
+	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+	public String userLogout(HttpServletRequest request, ModelMap model) {  
+		request.getSession().invalidate();
+		return "redirect:/";
+	}
 	
 	protected Map<String, String> getCountryList() {
 		Map<String,String> country = new LinkedHashMap<String,String>();

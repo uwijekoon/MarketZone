@@ -26,7 +26,7 @@
                                         <div class="span6">
                                             <h4>New Customer</h4>
                                             <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
-                                            <form action="${pageContext.request.contextPath}/user/register" method="post">
+                                            <form:form action="${basedURL}/user/register" method="get">
                                                 <fieldset>
                                                     <label class="radio" for="register">
                                                         <input type="radio" name="account" value="register" id="register" checked="checked">Register Account
@@ -35,34 +35,34 @@
                                                         <input type="radio" name="account" value="guest" id="guest">Guest Checkout
                                                     </label>-->
                                                     <br>
-                                                    <button class="btn btn-inverse" data-toggle="collapse" data-parent="#collapse2">Continue</button>
+                                                    <input tabindex="3" class="btn btn-inverse large" type="submit" value="Continue"/>
                                                 </fieldset>
-                                            </form>
+                                            </form:form>
                                         </div>
                                         <div class="span6">
                                             <h4>Returning Customer</h4>
                                             <p>I am a returning customer</p>
                                            <form:form action="${basedURL}user/login" method="post" commandName="loginForm">
-                        <fieldset>
-                            <div class="control-group">
-                                <label class="control-label">Username</label>
-                                <div class="controls">
-                                    <form:input type="text" placeholder="Enter your username" path="userCode" id="userCode" class="input-xlarge"/>
-                                </div>
-                                <form:errors path="userCode" class="form-error"></form:errors>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Password</label>
-                                <div class="controls">
-                                    <form:input type="password" placeholder="Enter your password" id="password" path="password" class="input-xlarge"/>
-                                </div>
-                                <form:errors path="password" class="form-error"></form:errors>
-                            </div>
-                            <div class="control-group">
-                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Continue"/>
-                            </div>
-                        </fieldset>
-                    </form:form>
+						                        <fieldset>
+						                            <div class="control-group">
+						                                <label class="control-label">Username</label>
+						                                <div class="controls">
+						                                    <form:input type="text" placeholder="Enter your username" path="userCode" id="userCode" class="input-xlarge"/>
+						                                </div>
+						                                <form:errors path="userCode" class="form-error"></form:errors>
+						                            </div>
+						                            <div class="control-group">
+						                                <label class="control-label">Password</label>
+						                                <div class="controls">
+						                                    <form:input type="password" placeholder="Enter your password" id="password" path="password" class="input-xlarge"/>
+						                                </div>
+						                                <form:errors path="password" class="form-error"></form:errors>
+						                            </div>
+						                            <div class="control-group">
+						                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Continue"/>
+						                            </div>
+						                        </fieldset>
+						                    </form:form>
                                         </div>
                                     </div>
 

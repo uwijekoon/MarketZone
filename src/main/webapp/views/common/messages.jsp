@@ -2,9 +2,7 @@
 <c:if test="${not empty successMessage}" >
     <div class="alert alert-success">
         <i class="ion-checkmark-circled"></i>
-        <c:forEach var="success" items="${successMessage}">
-            <span id="successMessageText"><c:out value="${success}" /></span></br>
-        </c:forEach>
+            <span id="successMessageText"><c:out value="${successMessage}" /></span></br>
         <i class="ion-close"></i>
     </div>
 </c:if>
@@ -12,9 +10,7 @@
 <c:if test="${not empty warningMessage}">
     <div class="alert alert-warning">
         <i class="ion-alert-circled"></i>
-        <c:forEach var="warning" items="${warningMessage}">
-            <span id="warningMessageText"><c:out value="${warning}" /></span></br>
-        </c:forEach>
+           <span id="warningMessageText"><c:out value="${warningMessage}" /></span></br>
         <i class="ion-close"></i>
     </div>
 </c:if>
@@ -22,19 +18,49 @@
 <c:if test="${not empty errorMessage}" >
     <div class="alert alert-danger">
         <i class="ion-close-circled"></i>
-        <c:forEach var="error" items="${errorMessage}">
-            <span id="errorMessageText"><c:out value="${error}" /></span></br>
-        </c:forEach>
+            <span id="errorMessageText"><c:out value="${errorMessage}" /></span></br>
         <i class="ion-close"></i>
     </div>
 </c:if>
 
+
 <c:if test="${not empty infoMessage}" >
     <div class="alert alert-info">
         <i class="ion-information-circled"></i>
-        <c:forEach var="info" items="${infoMessage}">
-            <span id="infoMessageText"><c:out value="${info}" /></span></br>
-        </c:forEach>
+            <span id="infoMessageText"><c:out value="${infoMessage}" /></span></br>
         <i class="ion-close"></i>
     </div>
 </c:if>
+
+<c:if test="${not empty flashSuccess}" >
+    <div class="alert alert-success">
+        <i class="ion-checkmark-circled"></i>
+            <span id="successMessageText"><c:out value="${flashSuccess}" /></span></br>
+        <i class="ion-close"></i>
+    </div>
+</c:if>
+
+<c:if test="${not empty flashWarning}">
+    <div class="alert alert-warning">
+        <i class="ion-alert-circled"></i>
+            <span id="warningMessageText"><c:out value="${flashWarning}" /></span></br>
+        <i class="ion-close"></i>
+    </div>
+</c:if>
+
+<c:if test="${not empty flashError}" >
+    <div class="alert alert-danger">
+        <i class="ion-close-circled"></i>
+            <span id="errorMessageText"><c:out value="${flashError}" /></span></br>
+        <i class="ion-close"></i>
+    </div>
+</c:if>
+
+<c:if test="${not empty flashInfo}" >
+    <div class="alert alert-info">
+        <i class="ion-information-circled"></i>
+            <span id="infoMessageText"><c:out value="${flashInfo}" /></span></br>
+        <i class="ion-close"></i>
+    </div>
+</c:if>
+

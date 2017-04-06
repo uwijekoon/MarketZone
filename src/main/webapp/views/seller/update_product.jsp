@@ -11,46 +11,46 @@
         </section>			
         <section class="main-content">				
             <div class="row">
-                <div class="span11">
-                    <form action="${pageContext.request.contextPath}/UpdateProduct" method="post">
-                        <input type="hidden" name="next" value="/">
-                        <input type="hidden" name="id" value="${product.id}"/>
+                <div class="span11 offset4">
+                    <form:form action="${basedURL}seller/updateProduct" method="post" commandName="productForm" >
                         <fieldset>
                             <div class="control-group">
-                                <label class="control-label">Name</label>
+                                <label class="control-label"><span class="required">*</span> Name</label>
                                 <div class="controls">
-                                    <input type="text" value="${product.name}" name="name" id="name" class="input-xlarge">
+                                    <form:input type="text" placeholder="Product Name" path="name" id="name" class="input-xlarge" />
+                                    <form:errors path="name" class="form-error"></form:errors>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label"><span class="required">*</span> Unit Price</label>
+                                <div class="controls">
+                                    <form:input type="text" placeholder="Unit Price" id="unitPrice" path="unitPrice" class="input-xlarge"/>
+                                    <form:errors path="unitPrice" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Description</label>
+                                <label class="control-label"><span class="required">*</span> Quantity</label>
                                 <div class="controls">
-                                    <input type="text" value="${product.description}" id="description" name="description" class="input-xlarge">
+                                    <form:input type="text" placeholder="Quantity" id="quantity" path="quantity" class="input-xlarge"/>
+                                    <form:errors path="quantity" class="form-error"></form:errors>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Unit Price</label>
-                                <div class="controls">
-                                    <input type="text" value="${product.unitPrice}" id="unitPrice" name="unitPrice" class="input-xlarge">
-                                </div>
-                            </div>
+                                <label class="control-label"><span class="required">*</span> Description</label>
+                                    <form:textarea type="text" placeholder="Product Description" path="description" class="input-xlarge"/>
+                                    <form:errors path="description" class="form-error"></form:errors>
+                             </div>
                             <div class="control-group">
-                                <label class="control-label">Quantity</label>
-                                <div class="controls">
-                                    <input type="text" value="${product.quantity}" id="quantity" name="quantity" class="input-xlarge">
-                                </div>
-                            </div>
-                  
-                            <div class="control-group">
-                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Update Product">
+                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Add Product">
                             </div>
                         </fieldset>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </section>			
     <jsp:include page="/views/common/footer.jsp"></jsp:include>
     </div>
-    <script src="${basedURL}/themes/js/common.js"></script>		
+    <script src="${basedURL}themes/js/common.js"></script>		
 </body>
 </html>

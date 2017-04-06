@@ -37,7 +37,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@RequestMapping(value = {"/downloadPdf"}, method = RequestMethod.GET)
-	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
+	public void addItem(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
 			BindingResult bindingResult, ModelMap model, Errors errors) { 
 		try{
 			String url = request.getRequestURL().toString();
@@ -55,7 +55,6 @@ public class OrderController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "";
 	}
 
 

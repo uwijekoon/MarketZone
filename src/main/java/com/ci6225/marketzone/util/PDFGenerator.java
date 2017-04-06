@@ -52,12 +52,12 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		writer.setPageEvent(new PDFGenerator());
 		document.open();
 		PDFHeader(document, order.getId()+"", order.getOrderStatusStr(), order.getAddress(), rootUrl);
-		PDFDetails(document, order);
+		PDFDetails(document, order, rootUrl);
 		document.close();
 		return pdffile.getAbsolutePath() ;
 	}
 	
-	private void PDFDetails(Document document, Order order) throws Exception{
+	private void PDFDetails(Document document, Order order, String rootUrl) throws Exception{
 		float[] colsWidth = {1f,3f,1f};
 		PdfPTable formattedTable = new PdfPTable(colsWidth);
 		formattedTable.setWidthPercentage(100);
@@ -68,7 +68,7 @@ public class PDFGenerator  extends PdfPageEventHelper{
 
 		for(OrderItem item : order.getOrderItems()){
 			Product product = item.getProduct();
-			formattedTable.addCell(getImageCell(Properties.getProperty("FILE_STORE_PATH")+"images/"+product.getImage()));
+			formattedTable.addCell(getImageCell(Properties.getProperty("FILE_STORE_PATH")+"images/"+product.getSeller().getId() + "/" + product.getImage(), rootUrl));
 			formattedTable.addCell(getTextCell(product.getName()));
 			formattedTable.addCell(getAmountCell("SGD " + item.getAmount()));
 			formattedTable.addCell(getTextCell("Qty: " + item.getQuantity()));
@@ -101,18 +101,20 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		return cell;
 	}
 	
-	private PdfPCell getImageCell(String imagePath) throws Exception{
-		PdfPCell cell = new PdfPCell();
+	private PdfPCell getImageCell(String imagePath, String rootUrl) throws Exception{
 		File imageFile = new File(imagePath);
-			if(imageFile.exists()){
-			Image image = Image.getInstance(imagePath);
-			image.setScaleToFitLineWhenOverflow(true);
-			cell = new PdfPCell(image);
-			cell.setPaddingRight(10f);
-			cell.setRowspan(3);
-			cell.setBorder(Rectangle.NO_BORDER);
-			cell.setPaddingBottom(20f);
+		Image image = null;
+		if(imageFile.exists()){
+			image = Image.getInstance(imagePath);
+		}else{
+			image = Image.getInstance(new URL(rootUrl+"/themes/images/no_image.png"));
 		}
+		image.setScaleToFitLineWhenOverflow(true);
+		PdfPCell cell = new PdfPCell(image);
+		cell.setPaddingRight(10f);
+		cell.setRowspan(3);
+		cell.setBorder(Rectangle.NO_BORDER);
+		cell.setPaddingBottom(20f);
 		return cell;
 	}
 	
@@ -146,7 +148,7 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		headerTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		headerTable.setHorizontalAlignment(Element.ALIGN_LEFT);
 
-		Image image = Image.getInstance(new URL(rootUrl+"/themes/images/logo.png"));
+		Image image = Image.getInstance(new URL(rootUrl+"/themes/images/logo_small.png"));
 		image.setScaleToFitLineWhenOverflow(true);
 		PdfPCell title1 = new PdfPCell(image);
 		//title1.setHorizontalAlignment(Element.ALIGN_CENTER);
