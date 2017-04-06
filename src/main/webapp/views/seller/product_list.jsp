@@ -22,12 +22,12 @@
                         </thead>
                         <tbody>
                         <c:forEach var="product" items="${productList}" varStatus="index">
-                            <tr class='clickable-row' data-href='${pageContext.request.contextPath}/ViewProductDetail?productId=${product.id}'>
+                            <tr class='clickable-row' data-href='${pageContext.request.contextPath}/seller/updateProduct?productId=${product.id}'>
                                 <td>${product.name}</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${not empty product.image}">
-                                         	<img src="${pageContext.request.contextPath}/Images/${sessionScope.user.id}/${product.image}" class="product-list-img"/>
+                                         	<img src="${pageContext.request.contextPath}/image/${sessionScope.user.id}/${product.image}" class="product-list-img"/>
                                         </c:when>
                                         <c:otherwise>
                                           <img src="${pageContext.request.contextPath}/themes/images/no_image.png" class="product-list-img"/>
