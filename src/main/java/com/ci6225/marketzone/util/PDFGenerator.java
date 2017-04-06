@@ -102,13 +102,17 @@ public class PDFGenerator  extends PdfPageEventHelper{
 	}
 	
 	private PdfPCell getImageCell(String imagePath) throws Exception{
-		Image image = Image.getInstance(imagePath);
-		image.setScaleToFitLineWhenOverflow(true);
-		PdfPCell cell = new PdfPCell(image);
-		cell.setPaddingRight(10f);
-		cell.setRowspan(3);
-		cell.setBorder(Rectangle.NO_BORDER);
-		cell.setPaddingBottom(20f);
+		PdfPCell cell = new PdfPCell();
+		File imageFile = new File(imagePath);
+			if(imageFile.exists()){
+			Image image = Image.getInstance(imagePath);
+			image.setScaleToFitLineWhenOverflow(true);
+			cell = new PdfPCell(image);
+			cell.setPaddingRight(10f);
+			cell.setRowspan(3);
+			cell.setBorder(Rectangle.NO_BORDER);
+			cell.setPaddingBottom(20f);
+		}
 		return cell;
 	}
 	
