@@ -26,13 +26,5 @@ public class ProductDao extends AbstractDao<Integer, Product>{
         criteria.add(Restrictions.eq("deleted", 'F'));
         return (List<Product>) criteria.list();
     }
-	
-	@SuppressWarnings("unchecked")
-    public List<Product> findProducts(int sellerId) {
-        Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("deleted", 'F'));
-        criteria.add(Restrictions.eq("seller_id", sellerId));
-        return (List<Product>) criteria.list();
-    }
     
 }

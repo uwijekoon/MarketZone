@@ -12,7 +12,7 @@
         <section class="main-content">				
             <div class="row">
                 <div class="span11 offset4">
-                    <form:form action="${basedURL}product/addProduct" method="post" commandName="productForm" accept-charset="utf-8" enctype="multipart/form-data" >
+                    <form:form action="${basedURL}seller/addProduct" method="post" commandName="productForm" accept-charset="utf-8" enctype="multipart/form-data" >
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Name</label>

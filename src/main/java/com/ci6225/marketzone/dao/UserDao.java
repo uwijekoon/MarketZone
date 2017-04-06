@@ -3,6 +3,7 @@ package com.ci6225.marketzone.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,12 @@ public class UserDao extends AbstractDao<Integer, User>{
     public List<User> findAllUsers() {
         Criteria criteria = createEntityCriteria();
         return (List<User>) criteria.list();
+    }
+	
+	public User findByUserEmail(String email) {
+		Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("email", email));
+        return (User) criteria.uniqueResult();
     }
     
 }

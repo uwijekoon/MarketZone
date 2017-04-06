@@ -7,6 +7,7 @@
     <jsp:include page="/views/common/menu.jsp"></jsp:include>	
         <section class="main-content">				
             <div class="row">
+            	<jsp:include page="/views/common/messages.jsp"></jsp:include>
                 <div class="span12">					
                     <h4 class="title"><span class="text">Product <strong>List</strong></span></h4>
                     <table class="table table-striped">
@@ -26,7 +27,7 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${not empty product.image}">
-                                          <img src="${pageContext.request.contextPath}/Images/${sessionScope.user.userId}/${product.image}" class="product-list-img"/>
+                                         	<img src="${pageContext.request.contextPath}/Images/${sessionScope.user.id}/${product.image}" class="product-list-img"/>
                                         </c:when>
                                         <c:otherwise>
                                           <img src="${pageContext.request.contextPath}/themes/images/no_image.png" class="product-list-img"/>
