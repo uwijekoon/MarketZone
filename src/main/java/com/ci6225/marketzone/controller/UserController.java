@@ -58,7 +58,6 @@ public class UserController {
         model.put("userForm", new User());
         model.put("loginForm", new User());
         model.put("countryList", getCountryList());
-        request.getSession().setAttribute("redirectPage", request.getRequestURI());
 		return VIEW_REGISTER;
 	}
 	
@@ -111,9 +110,9 @@ public class UserController {
         	if(dbUser != null) {
         		request.getSession().setAttribute("user", dbUser);
 	        	if(USER_TYPE_BUYER == dbUser.getUserType()) {
-	        		String redirectPage = (String) request.getSession().getAttribute("redirectPage");
+	        		String redirectPage = request.getParameter("redirectPage");
 	        		if(redirectPage != null){
-	        			return redirectPage;
+	        			return "redirect:/"+redirectPage;
 	        		}
 	        		return "redirect:/";
 	        	} else if(USER_TYPE_SELLER == dbUser.getUserType()) {

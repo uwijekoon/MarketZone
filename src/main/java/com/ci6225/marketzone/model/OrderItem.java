@@ -32,6 +32,8 @@ public class OrderItem {
     private int quantity;
 	@Column(name="amount")
     private double amount;
+	@Column(name="status")
+    private double status = 1;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id", nullable = false)
