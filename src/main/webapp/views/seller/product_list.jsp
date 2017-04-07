@@ -4,9 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
+    	<jsp:include page="/views/common/messages.jsp"></jsp:include>
         <section class="main-content">				
             <div class="row">
-            	<jsp:include page="/views/common/messages.jsp"></jsp:include>
                 <div class="span12">					
                     <h4 class="title"><span class="text">Product <strong>List</strong></span></h4>
                     <table class="table table-striped">

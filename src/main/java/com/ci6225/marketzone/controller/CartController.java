@@ -51,16 +51,22 @@ public class CartController {
 	private OrderService orderService;
 
 	@RequestMapping(value = {"/addItem"}, method = RequestMethod.POST)
-	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") CartItem item, BindingResult bindingResult, ModelMap model, final RedirectAttributes redirectAttributes, Errors errors) { 
+	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") @Validated CartItem item, BindingResult bindingResult, ModelMap model, final RedirectAttributes redirectAttributes, Errors errors) { 
 		
 		if(!bindingResult.hasErrors()) {
 			Product product = productService.findById(item.getProduct().getId());
-			cartService.getCartFromSession(request).addItemsToCart(product, item.getQuantity());;
-			return ViewConstants.VIEW_VIEW_CART;
+			if(product.getQuantity() >= item.getQuantity()) {
+				cartService.getCartFromSession(request).addItemsToCart(product, item.getQuantity());
+				return ViewConstants.VIEW_VIEW_CART;
+			} else {
+				redirectAttributes.addFlashAttribute("flashError", "Available product count is: "+product.getQuantity());
+			}
 		} else {
 			redirectAttributes.addFlashAttribute("flashError", "Please enter valid input!");
-    		return "redirect:/product/getProduct?productId="+item.getProduct().getId();
 		}
+		
+		redirectAttributes.addFlashAttribute("cartItem", item);
+    	return "redirect:/product/getProduct?productId="+item.getProduct().getId();
 	}
 
 	@RequestMapping(value = {"/viewCart"}, method = RequestMethod.GET)
