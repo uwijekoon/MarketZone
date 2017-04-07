@@ -37,13 +37,14 @@ public class PDFGenerator  extends PdfPageEventHelper{
 	private final Font subtitlefont = FontFactory.getFont("sans-serif", 10, Font.BOLD, BaseColor.BLACK);
 
 	public String generateOrderPdf(String rootUrl, Order order) throws Exception{
-		String directory = Properties.getProperty("FILE_STORE_PATH");
-		String strFileName = getUniqueFileName(directory + "/pdf","pdf");
+		String directory = Properties.getProperty("FILE_STORE_PATH")+ "/pdf";
+		String strFileName = getUniqueFileName(directory ,"pdf");
 		File outDir = new File(directory);
 		if(!outDir.exists()){
 			outDir.mkdirs();
 		}
 		File pdffile = new File(outDir,strFileName);
+		//pdffile.createNewFile();
 		Document document = new Document(PageSize.A4, this.DEFAULT_DOCUMENT_LEFT_MARGIN,
 				this.DEFAULT_DOCUMENT_BOTTOM_MARGIN,
 				this.DEFAULT_DOCUMENT_RIGHT_MARGIN,
