@@ -15,4 +15,5 @@ public class ViewConstants {
 	public static final String  VIEW_VIEW_CART = "redirect:/cart/viewCart";
 	public static final String VIEW_ORDER_REQUESTS = "/seller/order_requests";
 	public static final String  VIEW_ORDER_REQUEST = "seller/order_detail";
+	public static final String  CART_ITEMS = "cart/cart_items";
 }

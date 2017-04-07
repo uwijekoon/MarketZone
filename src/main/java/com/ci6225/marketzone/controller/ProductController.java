@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ci6225.marketzone.model.CartItem;
 import com.ci6225.marketzone.model.OrderItem;
 import com.ci6225.marketzone.model.Product;
 import com.ci6225.marketzone.model.ProductSearch;

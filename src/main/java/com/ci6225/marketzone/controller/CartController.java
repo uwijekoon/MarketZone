@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +84,7 @@ public class CartController {
 		cartService.updateCartItems(cart, quantityList);
 
 		request.setAttribute("cart", cart);
-		return ViewConstants.VIEW_CART;
+		return ViewConstants.CART_ITEMS;
 	}
 
 	@RequestMapping(value = {"/checkout"}, method = RequestMethod.POST)
