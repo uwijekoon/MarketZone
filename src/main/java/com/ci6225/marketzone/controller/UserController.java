@@ -128,10 +128,10 @@ public class UserController {
 	
 	protected Map<String, String> getCountryList() {
 		Map<String,String> country = new LinkedHashMap<String,String>();
-		country.put("US", "United Stated");
-		country.put("CHINA", "China");
-		country.put("SG", "Singapore");
-		country.put("MY", "Malaysia");
+		country.put("United Stated", "United Stated");
+		country.put("China", "China");
+		country.put("Singapore", "Singapore");
+		country.put("Malaysia", "Malaysia");
 
 		return country;
 	}

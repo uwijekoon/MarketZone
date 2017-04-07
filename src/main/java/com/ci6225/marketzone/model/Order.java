@@ -20,6 +20,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ci6225.marketzone.util.Constants;
 
@@ -36,30 +41,56 @@ public class Order {
     private int id;
     @Column(name="total_amount")
     private double subTotal;
+    
+    @NotNull
+	@Size(min=3, max=10, message="First Name must between 3 and 10 characters")
     @Column(name="first_name")
     private String firstName;
+    
+    @NotNull
+	@Size(min=3, max=10, message="Last Name must between 3 and 10 characters")
     @Column(name="last_name")
     private String lastName;
+    
+    @NotEmpty
+	@Email
     @Column(name="email")
     private String email;
+    
     @Column(name="telephone")
     private String telephone;
+    
+	@NotNull
+	@Size(min=3, max=100, message="Address1 must between 3 and 100 characters")
     @Column(name="address1")
     private String address1;
+    
     @Column(name="address2")
     private String address2;
+    
+    @NotNull
+	@Size(min=3, max=20, message="City must between 3 and 20 characters")
     @Column(name="city")
     private String city;
+    
+    @NotNull
+	@Size(min=3, max=10, message="First name must between 3 and 10 characters")
     @Column(name="postal_code")
     private String postalCode;
+    
+    
     @Column(name="country")
     private String country;
+    
     @Column(name="payment_method")
     private int paymentMethod;
+    
     @Column(name="comments")
     private String comments;
+    
     @Column(name="order_date")
     private Date orderDate;
+    
     @Column(name="status")
     private int status = 1;
     
