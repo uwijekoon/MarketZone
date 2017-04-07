@@ -43,6 +43,7 @@
                                             <h4>Returning Customer</h4>
                                             <p>I am a returning customer</p>
                                            <form:form action="${basedURL}user/login" method="post" commandName="loginForm">
+                                           <input type="hidden" name="redirectPage" value="cart/checkout"/>
 						                        <fieldset>
 						                            <div class="control-group">
 						                                <label class="control-label">Username</label>

@@ -29,8 +29,8 @@
                             <c:if test="${sessionScope.user != null}"><li>Welcome ${sessionScope.user.firstName} ${sessionScope.user.lastName} </li>
                                 <!--<li><a href="#">My Account</a></li>-->
                                     <c:if test="${sessionScope.user.userType == 1}">
-                                    <li><a href="${basedURL}/cart/viewCart">Your Cart</a></li>
-                                    <li><a href="${basedURL}/order/viewOrderHistory">Order History</a></li>
+                                    <li><a href="${basedURL}cart/viewCart">Your Cart</a></li>
+                                    <li><a href="${basedURL}order/viewOrderHistory">Order History</a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.user.userType == 2}">
                                     <li><a href="${basedURL}seller/productList">Products</a></li>
@@ -42,7 +42,7 @@
                             </c:if>
                             <c:if test="${sessionScope.user == null}">
                             	<li><a href="${basedURL}user/login">Login/Register</a></li>
-                            	<li><a href="${basedURL}/cart/viewCart">Your Cart</a></li>
+                            	<li><a href="${basedURL}cart/viewCart">Your Cart</a></li>
                             </c:if>
 
                         </ul>
