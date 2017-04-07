@@ -17,6 +17,7 @@
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Name</label>
                                 <div class="controls">
+                                 	<form:hidden path="id"/>
                                     <form:input type="text" placeholder="Product Name" path="name" id="name" class="input-xlarge" />
                                     <form:errors path="name" class="form-error"></form:errors>
                                 </div>
@@ -42,7 +43,7 @@
                                     <form:errors path="description" class="form-error"></form:errors>
                              </div>
                             <div class="control-group">
-                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Add Product">
+                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Update Product">
                             </div>
                         </fieldset>
                     </form:form>
