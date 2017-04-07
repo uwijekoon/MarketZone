@@ -5,7 +5,6 @@
 <spring:url value="/" var="basedURL" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
-    <jsp:include page="/views/common/menu.jsp"></jsp:include>
     <jsp:include page="/views/common/messages.jsp"></jsp:include>
         <section class="header_text sub">
             <h2><span>Check Out</span></h2>

@@ -18,6 +18,7 @@ import com.ci6225.marketzone.model.Product;
 import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.util.CommonUtil;
+import com.ci6225.marketzone.util.Properties;
 
 @Service("productService")
 @Transactional
@@ -48,7 +49,7 @@ public class ProductService {
 
 	public boolean saveProduct(Product product, User seller) {
 
-		String imagePath ="/Users/asankalakmal/Desktop/MarketZoneImages";
+		String imagePath =Properties.getProperty("FILE_STORE_PATH")+"images";
 		try {
 			MultipartFile multipartFile = product.getImageFile();
 			product.setImage(null);

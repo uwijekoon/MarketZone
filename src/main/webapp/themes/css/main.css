@@ -895,3 +895,8 @@ img.product-detail-image {
 .btn-product-detail {
 	margin-bottom: 10px;
 }
+
+#description{
+	width:350px;
+	height: 250px;
+}

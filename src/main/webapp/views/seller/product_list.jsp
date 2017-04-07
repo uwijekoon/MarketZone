@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
-    <jsp:include page="/views/common/menu.jsp"></jsp:include>	
         <section class="main-content">				
             <div class="row">
             	<jsp:include page="/views/common/messages.jsp"></jsp:include>

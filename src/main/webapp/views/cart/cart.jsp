@@ -6,7 +6,6 @@
 <spring:url value="/" var="basedURL" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
-    <jsp:include page="/views/common/menu.jsp"></jsp:include>			
         <section class="header_text sub">
             <h2><span>Shopping Cart</span></h2>
         </section>
@@ -16,7 +15,7 @@
                     <h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
                     <div id="cart_items">
                     <c:if test="${fn:length(cart.itemList) eq 0}">
-                        <h2 class="center">No item in the Cart</h2>
+                        <h2 class="center">No items in the Cart</h2>
                     </c:if>
                     <c:if test="${fn:length(cart.itemList) gt 0}">
                         <jsp:include page="/views/cart/cart_items.jsp" ></jsp:include>

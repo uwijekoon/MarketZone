@@ -2,7 +2,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
-    <jsp:include page="/views/common/menu.jsp"></jsp:include>	
     <div class="order-detail-pdf"><a href="${pageContext.request.contextPath}/order/downloadPdf?orderId=${order.id}">Download PDF</a></div>		
         <section class="header_text sub">
             <h2><span>YOUR ORDER</span></h2>

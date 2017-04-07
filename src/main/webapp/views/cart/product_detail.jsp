@@ -5,7 +5,6 @@
 <spring:url value="/" var="basedURL" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
-    <jsp:include page="/views/common/menu.jsp"></jsp:include>
     <jsp:include page="/views/common/messages.jsp"></jsp:include>
         <section class="header_text sub">
         <h4 class="product-title title"><span class="line"><strong>${cartItemForm.product.name}</strong></span></h4>
