@@ -150,6 +150,7 @@ public class PDFGenerator  extends PdfPageEventHelper{
 
 		Image image = Image.getInstance(new URL(rootUrl+"/themes/images/logo_small.png"));
 		image.setScaleToFitLineWhenOverflow(true);
+		//image.scaleToFit(100, 46);
 		PdfPCell title1 = new PdfPCell(image);
 		//title1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		title1.setBorder(Rectangle.NO_BORDER);

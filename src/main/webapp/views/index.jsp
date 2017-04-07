@@ -32,11 +32,29 @@
                 <div class="row">
                     <div class="span12">
                         <h4 class="title">
-                            <span class="pull-left"><span class="text"><span class="line">Latest <strong>Products</strong></span></span></span>
+                            <span class="pull-left"><span class="text"><span class="line"><strong>Products</strong> List</span></span></span>
                             <span class="pull-right">
                                 <a class="left button" href="#myCarousel-2" data-slide="prev"></a><a class="right button" href="#myCarousel-2" data-slide="next"></a>
                             </span>
                         </h4>
+                        <div>
+                        	<h5>Search Products</h5>
+                            <form:form action="${basedURL}product/search" method="post" commandName="searchForm">
+		                        <fieldset>
+		                            <div class="control-group product-search">
+		                                <h5><label class="search-label control-label">Name</label></h5>
+		                                <div class="controls">
+		                                    <form:input type="text" placeholder="Enter Product Name" path="productName" id="productName" class="input-xlarge"/>
+		                                </div>
+		                                <form:errors path="productName" class="form-error"></form:errors>
+		                            </div>
+		                            <div class="search-btn control-group ">
+		                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Search"/>
+		                            </div>
+		                        </fieldset>
+		                    </form:form>
+		                    </div>
+                        
                         <div id="myCarousel-2" class="myCarousel carousel slide">
                             <div class="carousel-inner">
 
@@ -50,16 +68,16 @@
                                             <li class="span3">
                                                 <div class="product-box">
                                                     <span class="sale_tag"></span>
-                                                    <p><a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}">
+                                                    <div><a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}">
                                                             <c:choose>
                                                                 <c:when test="${not empty product.image}">
-                                                                    <img width="100" height="100" src="${pageContext.request.contextPath}/Images/${product.seller.id}/${product.image}" />
+                                                                    <img width="100" height="100" src="${pageContext.request.contextPath}/image/${product.seller.id}/${product.image}" />
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <img width="100" height="100" src="${pageContext.request.contextPath}/themes/images/no_image.png" />
                                                                 </c:otherwise>
                                                             </c:choose>
-                                                        </a></p>
+                                                        </a></div>
                                                     <a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}" class="title">${product.name}</a><br/>
                                                     <a href="${pageContext.request.contextPath}/product/getProduct?productId=${product.id}" class="category">${product.seller.name}</a>
                                                     <p class="price"><fmt:formatNumber value="${product.unitPrice}" type="currency"/></p>

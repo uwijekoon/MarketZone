@@ -20,7 +20,7 @@
                 <td><a href="${pageContext.request.contextPath}/ViewProduct?productId=${item.product.id}">
                         <c:choose>
                             <c:when test="${not empty item.product.image}">
-                                <img src="${pageContext.request.contextPath}/Images/${item.product.seller.id}/${item.product.image}" class="product-cart-img"/>
+                                <img src="${pageContext.request.contextPath}/image/${item.product.seller.id}/${item.product.image}" class="product-cart-img"/>
                             </c:when>
                             <c:otherwise>
                                 <img src="${pageContext.request.contextPath}/themes/images/no_image.png" class="product-cart-img"/>

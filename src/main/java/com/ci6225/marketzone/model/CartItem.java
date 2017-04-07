@@ -2,7 +2,7 @@ package com.ci6225.marketzone.model;
 
 public class CartItem {
 	private Product product;
-	private int quantity;
+	private int quantity = 1;
 	
 	public Product getProduct() {
 		return product;

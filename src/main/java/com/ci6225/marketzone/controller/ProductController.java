@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ci6225.marketzone.model.CartItem;
 import com.ci6225.marketzone.model.OrderItem;
 import com.ci6225.marketzone.model.Product;
+import com.ci6225.marketzone.model.ProductSearch;
 import com.ci6225.marketzone.service.ProductService;
 import com.ci6225.marketzone.util.ViewConstants;
 
@@ -33,12 +36,20 @@ public class ProductController {
 		request.setAttribute("availableProductList", productList);
         return ViewConstants.VIEW_INDEX;
 	}
+	
+	@RequestMapping(value = {"/search"}, method = RequestMethod.POST)
+	public String searchProducts(HttpServletRequest request, ModelMap model,  @ModelAttribute("searchForm") ProductSearch search) { 
+		List<Product> productList = productService.searchProducs(search.getProductName());
+		request.setAttribute("availableProductList", productList);
+        return ViewConstants.VIEW_INDEX;
+	}
 
 
 	@RequestMapping(value = {"/getProduct"}, method = RequestMethod.GET)
 	public String getProductsDetails(HttpServletRequest request, ModelMap model) { 
 		Product product = productService.findById(Integer.valueOf(request.getParameter("productId")));
 		OrderItem item = new OrderItem();
+		item.setQuantity(1);
 		item.setProduct(product);
 		model.put("cartItemForm", item);
         return ViewConstants.PRODUCT_DETAIL;

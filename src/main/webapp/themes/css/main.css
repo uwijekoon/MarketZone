@@ -134,7 +134,7 @@ section.homepage-slider span{
 }
 section.header_text.sub{
 	font-size:14px;
-	margin-bottom:40px;
+	/*margin-bottom:40px;*/
 }
 section.header_text.sub h4{
 	text-transform:uppercase;
@@ -202,6 +202,7 @@ section#footer-bar .posts .post:last-child{
 section#footer-bar p.logo{
 	margin-top:10px;
 	width:120px;
+	float:right;
 }
 section#footer-bar a{
 	text-indent:15px;
@@ -446,6 +447,9 @@ section.navbar{
 }
 .product-box img{
 	overflow:hidden;
+	max-height: 100%;
+	width: 100px;
+	height: 100px;
 }
 .product-box a.title{
 	text-transform:uppercase;
@@ -810,7 +814,7 @@ section.header_text.sub_title{
 }
 
 .alert {
-    margin: 20px 0 0 30!important;
+    margin: 20px 10px 0 30px!important;
 }
 
 .file-upload {
@@ -835,7 +839,8 @@ img.product-list-img {
 }
 
 img.product-detail-image {
-    height: 350px;
+    height: 360px;
+    width: 360px;
 }
 
 .product-detail-box {
@@ -847,7 +852,8 @@ img.product-detail-image {
 }
 
 .product-cart-img {
-    height: 250px;
+    height: 100px;
+    width: 100px;
 }
 
 .navbar-inner {
@@ -863,4 +869,25 @@ img.product-detail-image {
 .form-error {
 	color: red;
 	margin-left: 5px
+}
+.order-detail-pdf{
+	float: right;
+}
+.search-btn{
+	float:left;
+	margin-left: 20px;
+}
+.product-search{
+	
+}
+.product-search label{
+	float:left;
+	margin-right: 20px;
+}
+.product-search .controls{
+	float:left;
+}
+
+.product-title{
+	background: none !important;
 }

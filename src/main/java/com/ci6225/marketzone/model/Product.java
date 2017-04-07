@@ -39,15 +39,11 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 	
-	@NotNull
-    @Size(min=2, max=30)
 	@Column(name="name")
     private String name;
 	@Column(name="description")
     private String description;
 	
-	@NotNull
-    @Min(1)
 	@Column(name="quantity")
     private Integer quantity;
 	@Column(name="unit_price")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ci6225.marketzone.dao.OrderDao;
+import com.ci6225.marketzone.dao.ProductDao;
 import com.ci6225.marketzone.model.Order;
 import com.ci6225.marketzone.model.OrderItem;
 import com.ci6225.marketzone.model.Product;
@@ -21,6 +22,9 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@Autowired
 	PDFGenerator pdfGen;
@@ -41,6 +45,9 @@ public class OrderService {
 			item.setAmount(item.getProduct().getUnitPrice() * item.getQuantity());
 		}
 		orderDao.saveCart(order);
+		for(OrderItem item:order.getOrderItems()){
+			productService.updateQuantity(item.getProduct().getId(), item.getQuantity());
+		}
 	}
 	
 	public List<Order> getOrderList(User user) {

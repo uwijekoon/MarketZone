@@ -46,7 +46,7 @@ public class OrderController {
 			int orderId = Integer.parseInt(request.getParameter("orderId"));
 			Order order = orderService.findById(orderId);
 			File pdf = new File(orderService.generatePdf(root, order));
-			response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + pdf.getName() +"\""));
+			response.setHeader("Content-Disposition", String.format("attachment; filename=\" MarketZone_order_" + order.getId()+ ".pdf\""));
 			InputStream inputStream = new FileInputStream(pdf);
 			IOUtils.copy(inputStream, response.getOutputStream());
 			response.setContentType("application/pdf");

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,10 @@ public class ProductService {
 		return productDao.findAvailableProducts();
 	}
 	
+	public List<Product> searchProducs(String productName) {
+		return productDao.searchProducts(productName);
+	}
+	
 
 	public List<Product> getProductList(User seller) {
 		return sellerDao.getProductList(seller.getId());
@@ -47,8 +52,8 @@ public class ProductService {
 		try {
 			MultipartFile multipartFile = product.getImageFile();
 			product.setImage(null);
-			if(multipartFile != null) {
-				String fileName = multipartFile.getOriginalFilename();
+			String fileName = multipartFile.getOriginalFilename();
+			if(multipartFile != null && !StringUtils.isEmpty(fileName)) {
 				String newName = CommonUtil.imageNameGenerate(fileName);
 				String fullUploadPath = imagePath + File.separator + seller.getId();
 				if(CommonUtil.isSetDirectory(fullUploadPath)) {
@@ -72,6 +77,32 @@ public class ProductService {
 			return false;
 		}
 		
+	}
+	
+	public boolean updateProduct(Product product, int sellerId) {
+		
+		Product exProduct = findById(product.getId());
+		if(exProduct != null && exProduct.getSeller().getId()==sellerId) {
+			exProduct.setName(product.getName());
+			exProduct.setUnitPrice(product.getUnitPrice());
+			exProduct.setQuantity(product.getQuantity());
+			exProduct.setDescription(product.getDescription());
+			productDao.persist(exProduct);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean updateQuantity(int productId, int usedQuantity){
+		Product product = findById(productId);
+		if(product != null) {
+			product.setQuantity(product.getQuantity() - usedQuantity);
+			productDao.persist(product);
+			return true;
+		}
+		
+		return false;
 	}
 
 }

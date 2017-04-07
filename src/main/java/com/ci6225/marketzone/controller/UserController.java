@@ -54,10 +54,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = {"/register","/login"}, method = RequestMethod.GET)
-	public String registerOnload(ModelMap model) {  
+	public String registerOnload(ModelMap model,HttpServletRequest request) {  
         model.put("userForm", new User());
         model.put("loginForm", new User());
         model.put("countryList", getCountryList());
+        request.getSession().setAttribute("redirectPage", request.getRequestURI());
 		return VIEW_REGISTER;
 	}
 	
@@ -66,7 +67,7 @@ public class UserController {
         
 		if(!bindingResult.hasErrors()){
 			if(userService.findByUserCode(user.getUserCode()) != null) {
-				errors.rejectValue("userCode", "exists.userForm.userCode", "UserName already existes!");
+				errors.rejectValue("userCode", "exists.userForm.userCode", "UserName already exists!");
 			}
 
 			if(userService.findByUserEmail(user.getEmail()) != null) {
@@ -110,6 +111,10 @@ public class UserController {
         	if(dbUser != null) {
         		request.getSession().setAttribute("user", dbUser);
 	        	if(USER_TYPE_BUYER == dbUser.getUserType()) {
+	        		String redirectPage = (String) request.getSession().getAttribute("redirectPage");
+	        		if(redirectPage != null){
+	        			return redirectPage;
+	        		}
 	        		return "redirect:/";
 	        	} else if(USER_TYPE_SELLER == dbUser.getUserType()) {
 	        		return "redirect:/seller/productList";

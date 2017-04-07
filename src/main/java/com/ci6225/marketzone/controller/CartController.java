@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,8 +49,9 @@ public class CartController {
 	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") CartItem item,
 			BindingResult bindingResult, ModelMap model, Errors errors) { 
 		Product product = productService.findById(item.getProduct().getId());
-		cartService.getCartFromSession(request).addItemsToCart(product, item.getQuantity());;
-		return ViewConstants.VIEW_CART;
+			cartService.getCartFromSession(request).addItemsToCart(product, item.getQuantity());;
+			return ViewConstants.VIEW_VIEW_CART;
+		
 	}
 
 	@RequestMapping(value = {"/viewCart"}, method = RequestMethod.GET)

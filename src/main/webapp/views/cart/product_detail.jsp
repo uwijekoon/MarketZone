@@ -8,7 +8,7 @@
     <jsp:include page="/views/common/menu.jsp"></jsp:include>
     <jsp:include page="/views/common/messages.jsp"></jsp:include>
         <section class="header_text sub">
-        <h2><span>Product Detail</span></h2>
+        <h4 class="product-title title"><span class="line"><strong>${cartItemForm.product.name}</strong></span></h4>
     </section>
     <section class="main-content">				
         <div class="row">						
@@ -16,9 +16,10 @@
                 <div class="row">
                     <div class="span4 product-detail-box">
                         <c:choose>
-                            <c:when test="${not empty detailProduct.image}">
-                                <a href="${pageContext.request.contextPath}/Images/${cartItemForm.product.seller.id}/${cartItemForm.product.image}" class="thumbnail" data-fancybox-group="group1" title="Description 1">
-                                <img alt="" src="${pageContext.request.contextPath}/Images/${cartItemForm.product.seller.id}/${cartItemForm.product.image}" class="product-detail-image"></a> 
+                            <c:when test="${not empty cartItemForm.product.image}">
+                                <a href="${pageContext.request.contextPath}/image/${cartItemForm.product.seller.id}/${cartItemForm.product.image}" class="thumbnail" data-fancybox-group="group1" title="${cartItemForm.product.name}">
+                                <img alt="" src="${pageContext.request.contextPath}/image/${cartItemForm.product.seller.id}/${cartItemForm.product.image}" 
+                                class="product-detail-image"></a> 
                             </c:when>
                             <c:otherwise>
                                 <a href="${pageContext.request.contextPath}/themes/images/no_image.png" class="thumbnail" data-fancybox-group="group1" title="Description 1">
@@ -58,8 +59,9 @@
                         <form:form action="${basedURL}cart/addItem" method="post"  commandName="cartItemForm">  
                         	<form:input type="hidden" path="product.id" id="productId" class="input-xlarge" value="${product.id}"/>  
                             <p>&nbsp;</p>
-                            <label>Qty:</label>
+                            <label>Quantity:</label>
                             <form:input type="text" path="quantity" id="quantity" class="input-xlarge"/>
+                             <form:errors path="quantity" class="form-error"></form:errors>
                             <form:button class="btn btn-inverse" type="submit">Add to cart</form:button>
                         </form:form>
                     </div>							
