@@ -110,6 +110,7 @@ public class PDFGenerator  extends PdfPageEventHelper{
 			image = Image.getInstance(new URL(rootUrl+"/themes/images/no_image.png"));
 		}
 		image.setScaleToFitLineWhenOverflow(true);
+		image.scaleToFit(100, 100);
 		PdfPCell cell = new PdfPCell(image);
 		cell.setPaddingRight(10f);
 		cell.setRowspan(3);
