@@ -84,25 +84,29 @@
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> First Name</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="firstName" value="${firstName}">
+                                                        <form:input placeholder="First Name" class="input-xlarge" path="firstName" />
+                                                        <form:errors path="firstName" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> Last Name</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="lastName" value="${lastName}">
+                                                        <form:input type="text" placeholder="Last Name" class="input-xlarge" path="lastName"/>
+                                                        <form:errors path="lastName" class="form-error"></form:errors>
                                                     </div>
                                                 </div>					  
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> Email Address</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="email" value="${email}">
+                                                        <form:input type="text" placeholder="Email" class="input-xlarge" path="email"/>
+                                                        <form:errors path="email" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label">Telephone</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="telephone" value="${telephone}">
+                                                        <form:input type="text" placeholder="Telephone" class="input-xlarge" path="telephone"/>
+                                                        <form:errors path="telephone" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
 
@@ -113,38 +117,39 @@
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> Address 1:</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="address1" value="${address1}">
+                                                        <form:input type="text" placeholder="Address 1" class="input-xlarge" path="address1"/>
+                                                        <form:errors path="address1" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label">Address 2:</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="address2" value="${address2}">
+                                                        <form:input type="text" placeholder="Address 2" class="input-xlarge" path="address2"/>
+                                                        <form:errors path="address2" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> City:</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="city" value="${city}">
+                                                        <form:input type="text" placeholder="City" class="input-xlarge" path="city" />
+                                                        <form:errors path="city" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> Postal Code:</label>
                                                     <div class="controls">
-                                                        <input type="text" placeholder="" class="input-xlarge" name="postalCode" value="${postalCode}">
+                                                        <form:input type="text" placeholder="Postal Code" class="input-xlarge" path="postalCode" />
+                                                        <form:errors path="postalCode" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label"><span class="required">*</span> Country:</label>
                                                     <div class="controls">
-                                                        <select class="input-xlarge" name="country">
-                                                            <option value="1">Afghanistan</option>
-                                                            <option value="2">Albania</option>
-                                                            <option value="3">Algeria</option>
-                                                            <option value="4">American Samoa</option>
-                                                            <option value="5">Andorra</option>
-                                                            <option value="6">Angola</option>
-                                                        </select>
+                                                        <form:select path="country" class="input-xlarge">
+														  <form:option value="" label="--- Select ---" />
+														  <form:options items="${countryList}" />
+													     </form:select>
+					                                     <form:errors path="country" class="form-error"></form:errors>
                                                     </div>
                                                 </div>
 
@@ -154,7 +159,7 @@
                                             <div class="control-group">
                                                 <label for="textarea" class="control-label">Comments</label>
                                                 <div class="controls">
-                                                    <textarea rows="3" id="textarea" class="span12" name="comments"></textarea>
+                                                    <form:textarea rows="3" placeholder="Comments" path="comments" class="span12"/>
                                                 </div>
                                             </div>									
                                             <button class="btn btn-inverse pull-right">Confirm order</button>

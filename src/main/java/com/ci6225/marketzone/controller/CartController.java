@@ -1,7 +1,9 @@
 package com.ci6225.marketzone.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,29 +89,60 @@ public class CartController {
 	}
 
 	@RequestMapping(value = {"/checkout"}, method = RequestMethod.POST)
-	public String checkout(HttpServletRequest request, ModelMap model, @ModelAttribute("orderForm") Order order) {
-		Cart cart = cartService.getCartFromSession(request);
-		order.setOrderItems(cart.getItemList());
-		order.setSubTotal(cart.getSubTotal());
-		orderService.saveCart(order, (User)request.getSession().getAttribute("user"));
-		cartService.removeCartFromSession(request);
-		request.setAttribute("order", order);
-		return ViewConstants.VIEW_ORDER;
+	public String checkout(HttpServletRequest request, ModelMap model, @ModelAttribute("orderForm") @Validated Order order, BindingResult bindingResult, final RedirectAttributes redirectAttributes, Errors errors) {
+		
+		if(!bindingResult.hasErrors()) {
+			Cart cart = cartService.getCartFromSession(request);
+			order.setOrderItems(cart.getItemList());
+			order.setSubTotal(cart.getSubTotal());
+			orderService.saveCart(order, (User)request.getSession().getAttribute("user"));
+			cartService.removeCartFromSession(request);
+			request.setAttribute("order", order);
+			return ViewConstants.VIEW_ORDER;
+		} else {
+			
+			model.put("orderForm", order);
+			model.put("countryList", getCountryList());
+			
+			User user = (User) request.getSession().getAttribute("user");
+			if(user == null){
+				model.put("userForm", new User());
+		        model.put("loginForm", new User());
+			}
+			return ViewConstants.VIEW_CHECKOUT;
+		}
 	}
 
 	@RequestMapping(value = {"/checkout"}, method = RequestMethod.GET)
 	public String checkoutLoad(HttpServletRequest request, ModelMap model) {
-		Cart cart = cartService.getCartFromSession(request);
-		Order order = new Order();
-		order.setOrderItems(cart.getItemList());
-		model.put("orderForm", order);
 		
+		model.put("countryList", getCountryList());
 		User user = (User) request.getSession().getAttribute("user");
+		
+		Order order = new Order();
 		if(user == null){
 			model.put("userForm", new User());
 	        model.put("loginForm", new User());
+		} else {
+			order.setFirstName(user.getFirstName());
+			order.setLastName(user.getLastName());
+			order.setEmail(user.getEmail());
+			order.setTelephone(user.getPhone());
+			order.setCountry(user.getCountry());
 		}
+		model.put("orderForm", order);
+
 		return ViewConstants.VIEW_CHECKOUT;
+	}
+	
+	protected Map<String, String> getCountryList() {
+		Map<String,String> country = new LinkedHashMap<String,String>();
+		country.put("United Stated", "United Stated");
+		country.put("China", "China");
+		country.put("Singapore", "Singapore");
+		country.put("Malaysia", "Malaysia");
+
+		return country;
 	}
 
 }
