@@ -15,7 +15,7 @@
                         <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
                     </form>-->
                     <c:if test="${sessionScope.user.userType == 2}">
-                        <a href="${basedURL}/ViewProductList" class="logo pull-left"><img src="${themeImg}/logo.png" class="site_logo" alt=""></a>
+                        <a href="${basedURL}seller/productList" class="logo pull-left"><img src="${themeImg}/logo.png" class="site_logo" alt=""></a>
                     </c:if>
                     <c:if test="${sessionScope.user.userType != 2}">
                         <a href="${basedURL}" class="logo pull-left"><img src="${themeImg}/logo.png" class="site_logo" alt=""></a>

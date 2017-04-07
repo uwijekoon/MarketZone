@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ci6225.marketzone.model.CartItem;
 import com.ci6225.marketzone.model.OrderItem;
@@ -46,8 +47,8 @@ public class ProductController {
 
 
 	@RequestMapping(value = {"/getProduct"}, method = RequestMethod.GET)
-	public String getProductsDetails(HttpServletRequest request, ModelMap model) { 
-		Product product = productService.findById(Integer.valueOf(request.getParameter("productId")));
+	public String getProductsDetails(HttpServletRequest request, ModelMap model, @RequestParam(value = "productId") int productId) { 
+		Product product = productService.findById(productId);
 		OrderItem item = new OrderItem();
 		item.setQuantity(1);
 		item.setProduct(product);
