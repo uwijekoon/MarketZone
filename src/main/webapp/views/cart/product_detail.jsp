@@ -60,8 +60,8 @@
                             <p>&nbsp;</p>
                             <label>Quantity:</label>
                             <form:input type="text" path="quantity" id="quantity" class="input-xlarge"/>
+                            <form:button class="btn btn-inverse btn-product-detail" type="submit">Add to cart</form:button>
                              <form:errors path="quantity" class="form-error"></form:errors>
-                            <form:button class="btn btn-inverse" type="submit">Add to cart</form:button>
                         </form:form>
                     </div>							
                 </div>

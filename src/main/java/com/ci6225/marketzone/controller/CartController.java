@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ci6225.marketzone.model.Cart;
 import com.ci6225.marketzone.model.CartItem;
@@ -29,6 +31,7 @@ import com.ci6225.marketzone.util.ViewConstants;
 
 @Controller
 @RequestMapping("/cart")
+@Scope("request")
 public class CartController {
 
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(CartController.class);
@@ -46,12 +49,16 @@ public class CartController {
 	private OrderService orderService;
 
 	@RequestMapping(value = {"/addItem"}, method = RequestMethod.POST)
-	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") CartItem item,
-			BindingResult bindingResult, ModelMap model, Errors errors) { 
-		Product product = productService.findById(item.getProduct().getId());
+	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") CartItem item, BindingResult bindingResult, ModelMap model, final RedirectAttributes redirectAttributes, Errors errors) { 
+		
+		if(!bindingResult.hasErrors()) {
+			Product product = productService.findById(item.getProduct().getId());
 			cartService.getCartFromSession(request).addItemsToCart(product, item.getQuantity());;
 			return ViewConstants.VIEW_VIEW_CART;
-		
+		} else {
+			redirectAttributes.addFlashAttribute("flashError", "Please enter valid input!");
+    		return "redirect:/product/getProduct?productId="+item.getProduct().getId();
+		}
 	}
 
 	@RequestMapping(value = {"/viewCart"}, method = RequestMethod.GET)

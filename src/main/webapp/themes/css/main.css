@@ -835,9 +835,7 @@ section.header_text.sub_title{
 }
 
 img.product-list-img {
-    width: 100px;
-    height: 100px;
-    max-width: none;
+    width: 75px
 }
 
 img.product-detail-image {
@@ -893,7 +891,12 @@ img.product-detail-image {
 .product-title{
 	background: none !important;
 }
-#description{
+
+.btn-product-detail {
+	margin-bottom: 10px;
+}
+
+.addproduct-description{
 	width:350px;
 	height: 250px;
 }

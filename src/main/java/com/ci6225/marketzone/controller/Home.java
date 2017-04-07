@@ -60,7 +60,7 @@ public class Home {
 		if(new File(imagePath).exists()){
 			in = new FileInputStream(imagePath);
 		}else{
-			in = context.getResource("themes/images/no_image.png").openStream();
+			in = context.getResource("/themes/images/no_image.png").openStream();
 		}
 	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 	    IOUtils.copy(in, response.getOutputStream());

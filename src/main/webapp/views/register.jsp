@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:url value="/" var="basedURL" />
@@ -97,7 +99,7 @@
                                      <form:errors path="country" class="form-error"></form:errors>
                                 </div>
                             </div>
-                           <div class="control-group seller-field ${userType=='2' ? 'show' : 'hide'}">
+                           <div class="control-group seller-field ${userForm.userType eq '2' ? 'show' : 'hide'}">
                                 <label class="control-label"><span class="required">*</span> Shop Name:</label>
                                 <div class="controls">
                                     <form:input type="text" placeholder="Enter your Shop Name" path="shopName" class="input-xlarge"/>
@@ -105,7 +107,7 @@
                                 </div> 
                                 
                             </div>
-                            <div class="control-group seller-field ${userType=='2' ? 'show' : 'hide'}">
+                            <div class="control-group seller-field ${userForm.userType eq '2' ? 'show' : 'hide'}">
                                 <label class="control-label"><span class="required">*</span> Description:</label>
                                 <div class="controls">
                                     <form:textarea type="text" placeholder="Enter your Description" path="description" class="input-xlarge"/>

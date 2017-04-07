@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ import com.ci6225.marketzone.util.ViewConstants;
 
 @Controller
 @RequestMapping("/order")
+@Scope("request")
 public class OrderController {
 
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);

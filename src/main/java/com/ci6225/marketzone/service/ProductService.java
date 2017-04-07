@@ -57,7 +57,7 @@ public class ProductService {
 			if(multipartFile != null && !StringUtils.isEmpty(fileName)) {
 				String newName = CommonUtil.imageNameGenerate(fileName);
 				String fullUploadPath = imagePath + File.separator + seller.getId();
-				if(CommonUtil.isSetDirectory(fullUploadPath)) {
+				if(CommonUtil.isSetDirectory(imagePath) && CommonUtil.isSetDirectory(fullUploadPath)) {
 					FileCopyUtils.copy(product.getImageFile().getBytes(), new File(fullUploadPath + File.separator + newName));
 					product.setImage(newName);
 				} 
