@@ -10,7 +10,7 @@ import javax.jms.Topic;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import com.ci6225.marketzone.jms.config.CommandLineChat;
+//import com.ci6225.marketzone.jms.config.CommandLineChat;
 import com.ci6225.marketzone.jms.config.JMSConfig;
 import com.ci6225.marketzone.jms.vo.MessageVo;
 

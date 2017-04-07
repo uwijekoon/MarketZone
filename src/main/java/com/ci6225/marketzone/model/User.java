@@ -16,9 +16,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="USER")
@@ -33,27 +37,40 @@ public class User implements Serializable{
 	@Column(name="user_type_id")
 	private int userType;
 	
+	@NotNull
+	@Size(min=3, max=10, message="Username must between 3 and 10 characters")
 	@Column(name="usercode", unique=true)
 	private String userCode;
 	
+	@NotNull
+	@Size(min=3, max=10, message="First name must between 3 and 10 characters")
 	@Column(name="first_name")
 	private String firstName;
 	
+	@NotNull
+	@Size(min=3, max=10, message="Last name must between 3 and 10 characters")
 	@Column(name="last_name")
 	private String lastName;
 	
+	@NotEmpty
+	@Email
 	@Column(name="email", unique=true)
 	private String email;
 	
+	@NotNull
+	@Size(min=5, max=12, message="Phone number must between 3 and 10 characters")
 	@Column(name="phone")
 	private String phone;
 	
+	@NotEmpty
 	@Column(name="country")
 	private String country;
 	
+	@NotNull
+	@Size(min=5, max=50, message="Password must between 3 and 10 characters")
 	@Column(name="password")
 	private String password;
-	
+
 	@Transient
 	private String confirmPassword;
 	

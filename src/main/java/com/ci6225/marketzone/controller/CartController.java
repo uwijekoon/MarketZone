@@ -16,6 +16,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ci6225.marketzone.model.Cart;
 import com.ci6225.marketzone.model.CartItem;
@@ -46,12 +47,16 @@ public class CartController {
 	private OrderService orderService;
 
 	@RequestMapping(value = {"/addItem"}, method = RequestMethod.POST)
-	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") CartItem item,
-			BindingResult bindingResult, ModelMap model, Errors errors) { 
-		Product product = productService.findById(item.getProduct().getId());
+	public String addItem(HttpServletRequest request, @ModelAttribute("cartForm") CartItem item, BindingResult bindingResult, ModelMap model, final RedirectAttributes redirectAttributes, Errors errors) { 
+		
+		if(!bindingResult.hasErrors()) {
+			Product product = productService.findById(item.getProduct().getId());
 			cartService.getCartFromSession(request).addItemsToCart(product, item.getQuantity());;
 			return ViewConstants.VIEW_VIEW_CART;
-		
+		} else {
+			redirectAttributes.addFlashAttribute("flashError", "Please enter valid input!");
+    		return "redirect:/product/getProduct?productId="+item.getProduct().getId();
+		}
 	}
 
 	@RequestMapping(value = {"/viewCart"}, method = RequestMethod.GET)

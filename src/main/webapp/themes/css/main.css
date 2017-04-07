@@ -891,3 +891,7 @@ img.product-detail-image {
 .product-title{
 	background: none !important;
 }
+
+.btn-product-detail {
+	margin-bottom: 10px;
+}

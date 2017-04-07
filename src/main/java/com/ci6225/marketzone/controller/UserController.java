@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.service.UserService;
+import com.ci6225.marketzone.validator.FormValidation;
 
 @Controller
 @RequestMapping("/user")
@@ -48,10 +49,8 @@ public class UserController {
 	@Qualifier("userService")
 	private UserService userService;
 	
-	@InitBinder
-	private void initBinder(WebDataBinder binder) {
-		binder.setValidator(validator);
-	}
+	@Autowired
+	private FormValidation formValidator;
 	
 	@RequestMapping(value = {"/register","/login"}, method = RequestMethod.GET)
 	public String registerOnload(ModelMap model,HttpServletRequest request) {  
@@ -64,16 +63,7 @@ public class UserController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(HttpServletRequest request, @ModelAttribute("userForm") @Validated User user, BindingResult bindingResult, ModelMap model, final RedirectAttributes redirectAttributes, Errors errors) {
         
-		if(!bindingResult.hasErrors()){
-			if(userService.findByUserCode(user.getUserCode()) != null) {
-				errors.rejectValue("userCode", "exists.userForm.userCode", "UserName already exists!");
-			}
-
-			if(userService.findByUserEmail(user.getEmail()) != null) {
-				errors.rejectValue("email", "exists.userForm.email", "Email already existes!");
-			}
-		}
-		
+		formValidator.registerValidate(user, errors, bindingResult);
         if(bindingResult.hasErrors()) {
         	model.put("countryList", getCountryList());
         	model.put("userForm", user);
@@ -102,9 +92,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, @ModelAttribute("loginForm") User user, BindingResult bindingResult, ModelMap model, Errors errors) {
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password", "Password is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userCode", "required.userCode", "UserCode is required.");
-		
+		formValidator.loginValidate(user, errors);
 		if(!bindingResult.hasErrors()) {
         	User dbUser = userService.userLogin(user.getUserCode(), user.getPassword());
         	if(dbUser != null) {
