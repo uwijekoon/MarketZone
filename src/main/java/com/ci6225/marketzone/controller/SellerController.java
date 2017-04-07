@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ci6225.marketzone.dao.ProductDao;
 import com.ci6225.marketzone.model.Product;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.service.ProductService;
@@ -29,6 +29,7 @@ import com.ci6225.marketzone.util.ViewConstants;
 
 @Controller
 @RequestMapping("/seller")
+@Scope("request")
 public class SellerController {
 	
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(SellerController.class);

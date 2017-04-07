@@ -58,7 +58,7 @@ public class User implements Serializable{
 	private String email;
 	
 	@NotNull
-	@Size(min=5, max=12, message="Phone number must between 3 and 10 characters")
+	@Size(min=5, max=12, message="Phone number must between 5 and 10 characters")
 	@Column(name="phone")
 	private String phone;
 	
@@ -67,7 +67,7 @@ public class User implements Serializable{
 	private String country;
 	
 	@NotNull
-	@Size(min=5, max=50, message="Password must between 3 and 10 characters")
+	@Size(min=5, max=50, message="Password must between 5 and 10 characters")
 	@Column(name="password")
 	private String password;
 

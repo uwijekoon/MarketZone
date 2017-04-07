@@ -37,7 +37,7 @@
                             </div>
                             <div class="control-group">
                                 <label class="control-label"><span class="required">*</span> Description</label>
-                                    <form:textarea type="text" placeholder="Product Description" path="description" class="input-xlarge"/>
+                                    <form:textarea type="text" placeholder="Product Description" path="description" class="input-xlarge addproduct-description"/>
                                     <form:errors path="description" class="form-error"></form:errors>
                              </div>
                             <div class="control-group file-upload">

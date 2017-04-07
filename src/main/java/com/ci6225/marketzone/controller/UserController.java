@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -30,6 +31,7 @@ import com.ci6225.marketzone.validator.FormValidation;
 
 @Controller
 @RequestMapping("/user")
+@Scope("request")
 public class UserController {
 	
 	private static final String VIEW_INDEX = "index";
