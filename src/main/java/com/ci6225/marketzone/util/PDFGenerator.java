@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import org.springframework.stereotype.Service;
 
@@ -66,24 +68,26 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		formattedTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		formattedTable.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 		formattedTable.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-
+		NumberFormat formatter = new DecimalFormat("#0.00"); 
 		for(OrderItem item : order.getOrderItems()){
 			Product product = item.getProduct();
 			formattedTable.addCell(getImageCell(Properties.getProperty("FILE_STORE_PATH")+"images/"+product.getSeller().getId() + "/" + product.getImage(), rootUrl));
 			formattedTable.addCell(getTextCell(product.getName()));
-			formattedTable.addCell(getAmountCell("SGD " + item.getAmount()));
+			formattedTable.addCell(getAmountCell("SGD " + formatter.format(item.getAmount())));
 			formattedTable.addCell(getTextCell("Qty: " + item.getQuantity()));
 			formattedTable.addCell(getTextCell("Seller: " + product.getSeller().getName()));
 		}
 		formattedTable.addCell("");
 		formattedTable.addCell(getRightAlignedCell("Sub Total:"));
-		formattedTable.addCell(getTextCell(order.getSubTotal()+""));
+
+		  
+		formattedTable.addCell(getRightAlignedCell("SGD " + formatter.format(order.getSubTotal())));
 		formattedTable.addCell("");
 		formattedTable.addCell(getRightAlignedCell("Admin Fee:"));
-		formattedTable.addCell(getTextCell(order.getAdminFee()+""));
+		formattedTable.addCell(getRightAlignedCell("SGD " + formatter.format(order.getAdminFee())));
 		formattedTable.addCell("");
 		formattedTable.addCell(getRightAlignedCell("Total:"));
-		formattedTable.addCell(getTextCell(order.getTotal()+""));
+		formattedTable.addCell(getRightAlignedCell("SGD " + formatter.format(order.getTotal())));
 		
 		document.add(formattedTable);
 	}
@@ -124,6 +128,7 @@ public class PDFGenerator  extends PdfPageEventHelper{
 		PdfPCell cell = new PdfPCell(new Paragraph(text, font));
 		cell.setBorder(Rectangle.NO_BORDER);
 		cell.setRowspan(3);
+		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		return cell;
 	}
 	

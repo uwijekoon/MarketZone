@@ -6,7 +6,6 @@
 <spring:url value="/themes/images" var="themeImg" />
 <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrapper" class="container">
-    <jsp:include page="/views/common/menu.jsp"></jsp:include>
         <section  class="homepage-slider" id="home-slider">
             <div class="flexslider">
                 <ul class="slides">

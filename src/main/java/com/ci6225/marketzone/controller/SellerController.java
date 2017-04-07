@@ -77,7 +77,7 @@ public class SellerController {
 	    		  redirectAttributes.addFlashAttribute("flashSuccess", "Product added successfully!");
 	    		  return "redirect:/seller/productList";
 	    	  } else {
-	    		  redirectAttributes.addFlashAttribute("flashError", "Some thing wrong in server!");
+	    		  redirectAttributes.addFlashAttribute("flashError", "Something went wrong in server!");
 	    		  return "redirect:/seller/addProduct";
 	    	  }
 	      }
