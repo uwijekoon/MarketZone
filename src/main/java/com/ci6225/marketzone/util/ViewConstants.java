@@ -13,4 +13,6 @@ public class ViewConstants {
 	public static final String  VIEW_ORDER = "buyer/order_detail";
 	public static final String VIEW_ORDER_HISTORY = "/buyer/order_history";
 	public static final String  VIEW_VIEW_CART = "redirect:/cart/viewCart";
+	public static final String VIEW_ORDER_REQUESTS = "/seller/order_requests";
+	public static final String  VIEW_ORDER_REQUEST = "seller/order_detail";
 }

@@ -59,7 +59,7 @@ public class OrderController {
 
 
 	@RequestMapping(value = {"/viewOrderHistory"}, method = RequestMethod.GET)
-	public String ViewOrderHistory(HttpServletRequest request) { 
+	public String viewOrderHistory(HttpServletRequest request) { 
 		try{
 			User user = (User)(request.getSession().getAttribute("user"));
 			List<Order> orderList = orderService.getOrderList(user);
@@ -71,10 +71,36 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = {"/viewOrder"}, method = RequestMethod.GET)
-	public String ViewOrder(HttpServletRequest request) { 
+	public String viewOrder(HttpServletRequest request) { 
 		try{
 			int id = Integer.parseInt(request.getParameter("orderId"));
 			Order order = orderService.findById(id);
+			request.setAttribute("order", order);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ViewConstants.VIEW_ORDER;
+	}
+	
+	@RequestMapping(value = {"/viewOrderRequests"}, method = RequestMethod.GET)
+	public String viewOrderRequests(HttpServletRequest request) { 
+		try{
+			User user = (User)(request.getSession().getAttribute("user"));
+			List<Order> orderList = orderService.getSellerOrderList(user.getSeller());
+			request.setAttribute("orderList", orderList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ViewConstants.VIEW_ORDER_REQUESTS;
+	}
+	
+	@RequestMapping(value = {"/viewOrderRequest"}, method = RequestMethod.GET)
+	public String viewOrderRequest(HttpServletRequest request) { 
+		try{
+			int id = Integer.parseInt(request.getParameter("orderId"));
+			User user = (User)request.getSession().getAttribute("user");
+			int sellerId = user.getId();
+			Order order = orderService.getOrderRequest(id, sellerId);
 			request.setAttribute("order", order);
 		}catch(Exception e){
 			e.printStackTrace();

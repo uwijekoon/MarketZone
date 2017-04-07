@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.ci6225.marketzone.util.Constants;
+
 /**
  *
  * @author Ureka
@@ -85,6 +87,13 @@ public class OrderItem {
 
 	public double getUnitPrice(){
 		return amount / quantity;
+	}
+	
+	public String getStatusStr(){
+		if(status == Constants.ORDER_STATUS_CONFIRMED){
+			return Constants.ORDER_STATUS_CONFIRMEDSTR;
+		}
+		return "";
 	}
 
 }

@@ -13,6 +13,7 @@ import com.ci6225.marketzone.dao.ProductDao;
 import com.ci6225.marketzone.model.Order;
 import com.ci6225.marketzone.model.OrderItem;
 import com.ci6225.marketzone.model.Product;
+import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.util.PDFGenerator;
 
@@ -52,5 +53,13 @@ public class OrderService {
 	
 	public List<Order> getOrderList(User user) {
 		return orderDao.findOrders(user);
+	}
+	
+	public List<Order> getSellerOrderList(Seller seller) {
+		return orderDao.findOrders(seller);
+	}
+	
+	public Order getOrderRequest(int id, int sellerId) {
+		return orderDao.getOrderRequest(id, sellerId);
 	}
 }

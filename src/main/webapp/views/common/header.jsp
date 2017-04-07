@@ -36,6 +36,7 @@
                                     <li><a href="${basedURL}seller/productList">Products</a></li>
                                     <!--<li><a href="${basedURL}/ViewOrders">Order List</a></li>-->
                                     <li><a href="${basedURL}seller/addProduct">Add Product</a></li>
+                                     <li><a href="${basedURL}order/viewOrderRequests">Order Requests</a></li>
                                     </c:if>
                                 <li><a href="${basedURL}user/logout">Logout</a></li>
 
