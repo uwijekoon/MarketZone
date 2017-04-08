@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ci6225.marketzone.dao.OrderDao;
-import com.ci6225.marketzone.dao.ProductDao;
 import com.ci6225.marketzone.model.Order;
 import com.ci6225.marketzone.model.OrderItem;
-import com.ci6225.marketzone.model.Product;
 import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
 import com.ci6225.marketzone.util.PDFGenerator;

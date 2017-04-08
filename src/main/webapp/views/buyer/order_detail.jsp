@@ -23,7 +23,7 @@
                     <tbody>
                         <c:forEach var="item" items="${order.orderItems}" varStatus="index">
                             <tr>
-                                <td><a href="${pageContext.request.contextPath}/ViewProduct?productIndex=${item.product.id}">
+                                <td><a href="${pageContext.request.contextPath}/product/getProduct?productId=${item.product.id}">
                                     <c:choose>
                                         <c:when test="${not empty item.product.image}">
                                             <img src="${pageContext.request.contextPath}/image/${item.product.seller.id}/${item.product.image}" class="product-cart-img"/>

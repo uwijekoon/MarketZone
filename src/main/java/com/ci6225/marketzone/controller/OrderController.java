@@ -39,7 +39,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@RequestMapping(value = {"/downloadPdf"}, method = RequestMethod.GET)
-	public void addItem(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
+	public void downloadPdf(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
 			BindingResult bindingResult, ModelMap model, Errors errors) { 
 		try{
 			String url = request.getRequestURL().toString();
@@ -107,7 +107,30 @@ public class OrderController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return ViewConstants.VIEW_ORDER;
+		return ViewConstants.VIEW_ORDER_REQUEST;
+	}
+	
+
+	@RequestMapping(value = {"/downloadOrderRequestPdf"}, method = RequestMethod.GET)
+	public void downloadOrderRequestPdf(HttpServletRequest request, @ModelAttribute("cartForm") OrderItem item, HttpServletResponse response,
+			BindingResult bindingResult, ModelMap model, Errors errors) { 
+		try{
+			String url = request.getRequestURL().toString();
+			String uri = request.getRequestURI();
+			String root = url.substring( 0, url.indexOf(uri) ) + request.getContextPath();
+			int orderId = Integer.parseInt(request.getParameter("orderId"));
+			User user = (User)request.getSession().getAttribute("user");
+			Order order = orderService.getOrderRequest(orderId, user.getId());
+			File pdf = new File(orderService.generatePdf(root, order));
+			response.setHeader("Content-Disposition", String.format("attachment; filename=\" MarketZone_order_" + order.getId()+ ".pdf\""));
+			InputStream inputStream = new FileInputStream(pdf);
+			IOUtils.copy(inputStream, response.getOutputStream());
+			response.setContentType("application/pdf");
+
+			response.flushBuffer();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

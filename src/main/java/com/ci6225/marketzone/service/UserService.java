@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ci6225.marketzone.dao.SellerDao;
 import com.ci6225.marketzone.dao.UserDao;
 import com.ci6225.marketzone.model.Seller;
 import com.ci6225.marketzone.model.User;
@@ -18,9 +17,6 @@ public class UserService {
 	
 	@Autowired
 	private UserDao userDao;
-	
-	@Autowired
-	private SellerDao sellerDao;
 	
 	public User findById(int id) {
 		return userDao.findById(id);
