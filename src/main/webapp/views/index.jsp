@@ -38,14 +38,14 @@
                         </h4>
                         <div>
                         	<h5>Search Products</h5>
-                            <form:form action="${basedURL}product/search" method="post" commandName="searchForm">
+                            <form:form action="${basedURL}product/search" method="get" commandName="searchForm">
 		                        <fieldset>
 		                            <div class="control-group product-search">
 		                                <h5><label class="search-label control-label">Name</label></h5>
 		                                <div class="controls">
 		                                    <form:input type="text" placeholder="Enter Product Name" path="productName" id="productName" class="input-xlarge"/>
+		                                    <form:errors path="productName" class="form-error"></form:errors>
 		                                </div>
-		                                <form:errors path="productName" class="form-error"></form:errors>
 		                            </div>
 		                            <div class="search-btn control-group ">
 		                                <input tabindex="3" class="btn btn-inverse large" type="submit" value="Search"/>
@@ -88,7 +88,10 @@
 
                                     </c:if>
                                 </c:forEach>
-
+                                
+                                <c:if test="${empty availableProductList}">
+                                	There is no product that matches the search criteria!
+								</c:if>
                             </div>							
                         </div>
                     </div>						

@@ -40,9 +40,9 @@ public class ProductController {
         return ViewConstants.VIEW_INDEX;
 	}
 	
-	@RequestMapping(value = {"/search"}, method = RequestMethod.POST)
-	public String searchProducts(HttpServletRequest request, ModelMap model,  @ModelAttribute("searchForm") ProductSearch search) { 
-		List<Product> productList = productService.searchProducs(search.getProductName());
+	@RequestMapping(value = {"/search"}, method = RequestMethod.GET)
+	public String searchProducts(HttpServletRequest request, ModelMap model,  @ModelAttribute("searchForm") ProductSearch search, @RequestParam(value = "productName") String productName) { 
+		List<Product> productList = productService.searchProducs(productName);
 		request.setAttribute("availableProductList", productList);
         return ViewConstants.VIEW_INDEX;
 	}
