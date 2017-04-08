@@ -69,7 +69,7 @@ public class UserController {
         		userService.userRegister(user);
         		redirectAttributes.addFlashAttribute("flashSuccess", "User added successfully!");
         		logger.info("User register successfully! userCode:"+user.getUserCode());
-        		return "redirect:/";
+        		return "redirect:/user/register";
         	} catch(Exception e) {
         		logger.error("User Reigister error happen :"+ e);
         		request.setAttribute("errorMessage", "Unknown Error!");
